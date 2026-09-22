@@ -69,7 +69,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 | [README.md](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/README.md) | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
 
 ## 🛠️ Yêu cầu môi trường
-Để chạy bài thực hành, cần cài đặt:
+Để chạy bài thực hành, cần cài đặt:  
 Python 3.x  
 Jupyter Notebook hoặc Visual Studio Code
 
