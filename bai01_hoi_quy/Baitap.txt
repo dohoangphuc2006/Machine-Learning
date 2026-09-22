@@ -1,0 +1,83 @@
+--- Cell 1 ---
+Kich thuoc bang (so dong, so cot): (60, 4)
+
+Nam dong dau tien:
+   dien_tich  so_phong  tuoi_nha   gia
+0       35.5         1        18  3.00
+1       37.6         2         7  3.87
+2       49.4         2        20  4.25
+3       49.0         2        16  4.60
+4       49.9         1        12  3.99
+
+Ten cac cot: ['dien_tich', 'so_phong', 'tuoi_nha', 'gia']
+
+Thong ke nhanh cot dien_tich va cot gia:
+       dien_tich    gia
+count      60.00  60.00
+mean       77.73   6.49
+std        20.22   1.64
+min        35.50   3.00
+25%        63.02   5.16
+50%        75.10   6.40
+75%        91.88   7.70
+max       117.50   9.74
+
+So o bi thieu trong tung cot:
+dien_tich    0
+so_phong     0
+tuoi_nha     0
+gia          0
+dtype: int64
+
+--- Cell 3 ---
+Số căn có diện tích > 100m²: 10
+Giá trung bình của nhóm (> 100m²): 8.9620 tỷ đồng
+
+--- Cell 5 ---
+[Biểu đồ hiển thị trong notebook]
+Nhận xét: Giá nhà có xu hướng đồng biến (tăng) theo số lượng phòng; căn hộ càng có nhiều phòng thì giá bán trung bình càng cao.
+
+--- Cell 7 ---
+Hệ số góc w = -0.037858
+Hệ số chặn b = 6.983593
+[Biểu đồ hiển thị trong notebook]
+
+--- NHẬN XÉT VÀ GIẢI THÍCH ---
+1. Nhận xét dấu: Hệ số w mang dấu âm (w = -0.037858).
+2. Giải thích: Dấu âm thể hiện mối quan hệ nghịch biến. Khi tuổi nhà tăng thêm 1 năm,
+   giá nhà có xu hướng giảm đi trung bình khoảng 0.037858 tỷ đồng (~37.86 triệu đồng)
+   do sự hao mòn theo thời gian về chất lượng công trình và hạ tầng nội thất.
+
+--- Cell 9 ---
+Hệ số R² trên tập kiểm tra (2 biến: dien_tich + so_phong): 0.9698
+
+--- SO SÁNH VÀ ĐÁNH GIÁ ---
+- R² mô hình 1 biến (dien_tich)          : 0.9622
+- R² mô hình 2 biến (dien_tich + so_phong): 0.9698
+- Mức chênh lệch                             : +0.0076 (+0.76%)
+
+Đánh giá: Việc thêm cột so_phong LÀ ĐÁNG. Mặc dù diện tích đã giải thích được phần lớn
+biến động giá (96.22%), việc bổ sung số phòng giúp mô hình nắm bắt thêm cấu trúc không gian
+nội thất, nâng khả năng giải thích lên 96.98% mà không làm tăng độ phức tạp tính toán đáng kể.
+
+--- Cell 11 ---
+MSE ở vòng 200 với tốc độ học 0.001 : 20.2979
+MSE ở vòng 200 với tốc độ học 1.02  : 268483526.2887
+
+--- THỰC NGHIỆM BỔ SUNG (DÒ RANH GIỚI HỘI TỤ) ---
+Tốc độ học 0.1   | MSE ở vòng 200: 0.1790
+Tốc độ học 0.5   | MSE ở vòng 200: 0.1790
+Tốc độ học 0.9   | MSE ở vòng 200: 0.1790
+Tốc độ học 0.99  | MSE ở vòng 200: 0.1934
+Tốc độ học 1.0   | MSE ở vòng 200: 44.8113
+Tốc độ học 1.001 | MSE ở vòng 200: 99.0347
+
+--- Cell 13 ---
+-> Giá dự đoán cho căn hộ 60m² là: 5.104 tỷ đồng
+
+-> Giá dự đoán cho căn hộ 80m² là: 6.671 tỷ đồng
+
+[CẢNH BÁO] Diện tích 200m² nằm ngoài khoảng dữ liệu quan sát (35.5 - 117.5 m²). Kết quả dự đoán chỉ là suy đoán kéo dài (extrapolation)!
+-> Giá dự đoán cho căn hộ 200m² là: 16.075 tỷ đồng
+
+
