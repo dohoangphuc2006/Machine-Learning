@@ -70,7 +70,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 
 ## 🛠️ Yêu cầu môi trường
 Để chạy bài thực hành, cần cài đặt:
-Python 3.x
+Python 3.x  
 Jupyter Notebook hoặc Visual Studio Code
 
 Có thể kiểm tra phiên bản Python bằng:
