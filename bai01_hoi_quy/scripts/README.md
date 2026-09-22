@@ -2,11 +2,11 @@
 
 # Bài 1:Hồi quy tuyến tính
 👨‍🎓 Thông tin sinh viên
--**Họ và tên:** Đỗ Hoàng Phúc
--**MSSV:** 24748020101313
--**Môn:** Học Máy Và Ứng Dụng
--**LHP:** 261_71ITAI41203_0101
--**GVHD:** ThS. Nguyễn Thái Anh ([GitHub](https://github.com/AnhNguyenVLU))
+**Họ và tên:** Đỗ Hoàng Phúc
+**MSSV:** 24748020101313
+**Môn:** Học Máy Và Ứng Dụng
+**LHP:** 261_71ITAI41203_0101
+**GVHD:** ThS. Nguyễn Thái Anh ([GitHub](https://github.com/AnhNguyenVLU))
 
 ## 📌 Nội dung bài thực hành
 
