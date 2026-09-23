@@ -66,7 +66,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 | [outputs/](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy/outputs) | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
 | [scripts/run_all.py](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/run_all.py) | Script dùng để chạy toàn bộ notebook trong thư mục `code/` và lưu kết quả vào thư mục `outputs/`. |
 | [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/requirements.txt) | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
-| [README.md](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/README.md) | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
+| [README.md](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/README.md) | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
 
 ## 🛠️ Yêu cầu môi trường
 Để chạy bài thực hành, cần cài đặt:  
