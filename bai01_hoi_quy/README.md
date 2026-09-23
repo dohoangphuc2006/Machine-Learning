@@ -65,7 +65,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 | [figures/](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy/figures) | Lưu các biểu đồ được tạo trong quá trình thực hành, bao gồm `bai2.png` và `bai3_tuoi_nha.png`. |
 | [outputs/](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy/outputs) | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
 | [scripts/run_all.py](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/run_all.py) | Script dùng để chạy toàn bộ notebook trong thư mục `code/` và lưu kết quả vào thư mục `outputs/`. |
-| [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/requirements.txt) | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
+| [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/requirements.txt) | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
 | [README.md](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/README.md) | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
 
 ## 🛠️ Yêu cầu môi trường
@@ -78,7 +78,7 @@ Có thể kiểm tra phiên bản Python bằng:
 python --version
 ```
 ## 📦 Cài đặt thư viện
-### Cách 1 – Sử dụng [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/requirements.txt)
+### Cách 1 – Sử dụng [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/requirements.txt)
 
 Từ thư mục gốc của project, chạy:
 ```text
