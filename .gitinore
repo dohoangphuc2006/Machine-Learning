@@ -1,26 +1,12 @@
-# Python cache
+# Python và môi trường ảo
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Jupyter Notebook
-.ipynb_checkpoints/
-
-# Virtual environment
 .venv/
 venv/
 env/
 
-# VS Code
-.vscode/
-
-# Python environment
-.env
-
-# OS files
+# Tệp tạm của notebook và hệ điều hành
+.ipynb_checkpoints/
+*.ipynb.tmp
 .DS_Store
 Thumbs.db
-
-# Temporary files
-*.tmp
-*.temp
