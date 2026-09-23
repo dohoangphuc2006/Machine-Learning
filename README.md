@@ -26,7 +26,7 @@ Mỗi tuần học được tổ chức thành một thư mục riêng. Mỗi La
 
 | Bài | Nội dung | Hướng dẫn |
 | --- | --- | --- |
-| 01 | Hồi quy tuyến tính: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [Bài 01 — Hồi quy tuyến tính](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/README.md) |
+| 01 | Hồi quy tuyến tính: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [Bài 01 — Hồi quy tuyến tính](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/README.md) |
 | 02 | Lab 02 | Đang cập nhật |
 | 03 | Lab 03 | Đang cập nhật |
 | 04 | Lab 04 | Đang cập nhật |
@@ -60,7 +60,7 @@ cd Machine-Learning
 
 ## 📚 Chạy từng Lab
 Mỗi Lab có README riêng chứa hướng dẫn cài đặt và chạy chi tiết.  
-[Bài 01 — Hồi quy tuyến tính](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/README.md)  
+[Bài 01 — Hồi quy tuyến tính](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/README.md)  
 
 
 
