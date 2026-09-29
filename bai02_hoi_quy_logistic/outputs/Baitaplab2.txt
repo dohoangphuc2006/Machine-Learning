@@ -1,0 +1,75 @@
+--- Cell 2 ---
+So sinh vien co diem giua ky >= 7.0: 31
+Ty le qua mon cua nhom diem >= 7.0 : 0.9032
+Ty le qua mon cua nhom diem < 7.0  : 0.4831
+
+Nhan xet:
+Diem giua ky phan biet rat tot hai nhom vi ty le qua mon cua nhom
+diem cao (>= 7.0) vuot troi hon han so voi nhom con lai.
+
+--- Cell 5 ---
+Da ve va luu bieu do vao tep sigmoid.png thanh cong.
+[Biểu đồ hiển thị trong notebook]
+
+--- Cell 8 ---
+Ket qua du doan cho cac moc gio on:
+Gio on:  3.00 -> z =  -3.89 | Xac suat qua = 0.0201 | Nhan = 0
+Gio on:  8.00 -> z =  -1.92 | Xac suat qua = 0.1276 | Nhan = 0
+Gio on: 12.89 -> z =  -0.00 | Xac suat qua = 0.4996 | Nhan = 0
+Gio on: 18.00 -> z =   2.01 | Xac suat qua = 0.8814 | Nhan = 1
+Gio on: 26.00 -> z =   5.15 | Xac suat qua = 0.9942 | Nhan = 1
+
+Giai thich:
+Voi gio_on = 12.89, gia tri z = w * 12.89 + b xap xi bang 0.
+Vi sigmoid(0) = 1/(1 + e^0) = 1/2 = 0.5 nen xac suat ra gan dung 0.5.
+
+--- Cell 11 ---
+TP = 17, TN = 9, FP = 3, FN = 1
+
+Ket qua tu tinh bang cong thuc:
+Accuracy  = 0.8667
+Precision = 0.8500
+Recall    = 0.9444
+F1-score  = 0.8947
+
+--- Cell 14 ---
+Bang do tim nguong theo F1:
+ Nguong       F1-score
+  0.05         0.7826
+  0.10         0.8182
+  0.15         0.8182
+  0.20         0.8571
+  0.25         0.9000
+  0.30         0.8947
+  0.35         0.8947
+  0.40         0.8947
+  0.45         0.8947
+  0.50         0.8947
+  0.55         0.8889
+  0.60         0.9412
+  0.65         0.9412
+  0.70         0.9091
+  0.75         0.8750
+  0.80         0.8387
+  0.85         0.8000
+  0.90         0.5600
+  0.95         0.4348
+
+Nguong cho F1 cao nhat la: 0.60 voi F1 = 0.9412
+
+Nhan xet:
+Nguong toi uu theo F1 co the khong nhat thiet phai bang dung 0.5.
+F1 cao nhat dat duoc o khoang nguong can bang tot nhat giua Precision va Recall.
+
+--- Cell 17 ---
+So sanh hai lop duong:
+Lop 1 (Qua mon) : Precision = 0.8500, Recall = 0.9444
+Lop 0 (Rot mon) : Precision = 0.9000, Recall = 0.7500
+
+Giai thich:
+Hai bo so khac nhau vi khi doi lop duong sang lop 0:
+- 'Duong tinh' (Positive) bay gio la doan ROT MON.
+- Precision cua lop 0 = TN / (TN + FN): trong cac ban du doan rot, bao nhieu ban rot that.
+- Recall cua lop 0 = TN / (TN + FP): trong tong so ban that su rot, mo hinh bat duoc bao nhieu ban.
+Mau so va goc nhin ve loi FP/FN da hoan doi cho nhau giua hai lop.
+
