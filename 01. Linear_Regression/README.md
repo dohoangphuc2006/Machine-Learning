@@ -58,15 +58,15 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 ```
 | Thư mục / tệp | Chức năng |
 | --- | --- |
-| [code/](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy/code) | Chứa 2 notebook thực hành và bài tập. Chạy các cell theo thứ tự từ trên xuống để dữ liệu và biến được khởi tạo đầy đủ. |
-| [code/Lab1_DoHoangPhuc.ipynb](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/code/Lab1_DoHoangPhuc.ipynb) | Các bước thực hành: đọc dữ liệu, tính sai số, bình phương tối thiểu, sử dụng Scikit-learn, đánh giá mô hình, Gradient Descent và hồi quy nhiều biến. |
-| [code/Baitap.ipynb](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/code/Baitap.ipynb) | Chứa lời giải bài tập 1–6, bao gồm mã nguồn, kết quả và phần nhận xét. |
-| [data/gia_nha.csv](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/data/gia_nha.csv) | Bộ dữ liệu gồm 60 căn nhà với các thuộc tính `dien_tich`, `so_phong`, `tuoi_nha` và `gia`. Cần giữ tệp này để chạy chương trình. |
-| [figures/](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy/figures) | Lưu các biểu đồ được tạo trong quá trình thực hành, bao gồm `bai2.png` và `bai3_tuoi_nha.png`. |
-| [outputs/](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy/outputs) | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
-| [scripts/run_all.py](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/run_all.py) | Script dùng để chạy toàn bộ notebook trong thư mục `code/` và lưu kết quả vào thư mục `outputs/`. |
-| [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/requirements.txt) | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
-| [README.md](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/README.md) | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
+| `code/` | Chứa 2 notebook thực hành và bài tập. Chạy các cell theo thứ tự từ trên xuống để dữ liệu và biến được khởi tạo đầy đủ. |
+| `code/Lab1_DoHoangPhuc.ipynb` | Các bước thực hành: đọc dữ liệu, tính sai số, bình phương tối thiểu, sử dụng Scikit-learn, đánh giá mô hình, Gradient Descent và hồi quy nhiều biến. |
+| `code/Baitap.ipynb` | Chứa lời giải bài tập 1–6, bao gồm mã nguồn, kết quả và phần nhận xét. |
+| `data/gia_nha.csv` | Bộ dữ liệu gồm 60 căn nhà với các thuộc tính `dien_tich`, `so_phong`, `tuoi_nha` và `gia`. Cần giữ tệp này để chạy chương trình. |
+| `figures/` | Lưu các biểu đồ được tạo trong quá trình thực hành, bao gồm `bai2.png` và `bai3_tuoi_nha.png`. |
+| `outputs/` | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
+| `scripts/run_all.py` | Script dùng để chạy toàn bộ notebook trong thư mục `code/` và lưu kết quả vào thư mục `outputs/`. |
+| `requirements.txt` | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
+| `README.md` | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
 
 ## 🛠️ Yêu cầu môi trường
 Để chạy bài thực hành, cần cài đặt:  
@@ -78,7 +78,7 @@ Có thể kiểm tra phiên bản Python bằng:
 python --version
 ```
 ## 📦 Cài đặt thư viện
-### Cách 1 – Sử dụng [requirements.txt](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/requirements.txt)
+### Cách 1 – Sử dụng `requirements.txt`
 
 Từ thư mục gốc của project, chạy:
 ```text
@@ -94,15 +94,15 @@ pip install numpy pandas matplotlib scikit-learn notebook nbclient nbformat ipyk
 ### Cách 1 - Khởi động Jupyter Notebook:
 jupyter notebook
 Sau đó mở:
-[Lab1_DoHoangPhuc.ipynb](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/code/Lab1_DoHoangPhuc.ipynb)
+`Lab1_DoHoangPhuc.ipynb`
 hoặc:
 
-[Baitap.ipynb](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/code/Baitap.ipynb)
+`Baitap.ipynb`
 và chạy từng cell từ trên xuống dưới.
 
 ### Cách 2 - Chạy toàn bộ bằng script
 Project có file:
-[run_all.py](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/scripts/run_all.py)
+`run_all.py`
 
 Có thể chạy bằng:
 ```text
@@ -112,7 +112,7 @@ Script dùng để thực hiện các chương trình được chuẩn bị sẵ
 
 ## ⚠️ Lưu ý
 ### 1. Chạy từ thư mục gốc
-Nên chạy các lệnh từ thư mục: [bai01_hoi_quy](https://github.com/dohoangphuc2006/Machine-Learning/tree/main/bai01_hoi_quy)
+Nên chạy các lệnh từ thư mục: `01. Linear_Regression`
 để đảm bảo đường dẫn: `data/gia_nha.csv` được nhận diện chính xác.
 
 ### 2. Không thay đổi cấu trúc thư mục
