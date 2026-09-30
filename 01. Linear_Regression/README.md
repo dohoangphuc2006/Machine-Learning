@@ -14,16 +14,16 @@ Bài thực hành tìm hiểu và áp dụng hồi quy tuyến tính (Linear Reg
 
 Nội dung bao gồm:
 
-Đọc và kiểm tra dữ liệu bằng Pandas
-Trực quan hóa dữ liệu bằng Matplotlib
-Tính hệ số hồi quy tuyến tính
-Tính sai số MSE
-Xây dựng mô hình hồi quy tuyến tính bằng Scikit-learn
-Chia dữ liệu thành tập huấn luyện và tập kiểm tra
-Đánh giá mô hình bằng MAE, RMSE và R²
-Tìm hiểu Gradient Descent
-Xây dựng mô hình hồi quy tuyến tính với nhiều biến
-Thực hiện các bài tập áp dụng từ 1 đến 6
+Đọc và kiểm tra dữ liệu bằng Pandas  
+Trực quan hóa dữ liệu bằng Matplotlib  
+Tính hệ số hồi quy tuyến tính  
+Tính sai số MSE  
+Xây dựng mô hình hồi quy tuyến tính bằng Scikit-learn  
+Chia dữ liệu thành tập huấn luyện và tập kiểm tra  
+Đánh giá mô hình bằng MAE, RMSE và R²  
+Tìm hiểu Gradient Descent  
+Xây dựng mô hình hồi quy tuyến tính với nhiều biến  
+Thực hiện các bài tập áp dụng từ 1 đến 6  
 
 ## 📂 Nội dung mã nguồn
 Hai notebook chính được sử dụng trong bài:
