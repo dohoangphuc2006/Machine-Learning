@@ -49,8 +49,8 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 │   ├── bai2.png
 │   └── bai3.png
 ├── outputs/
-│   ├── Lab1_DoHoangPhuc.txt
-│   └── Baitap.txt
+│   ├── Baitap.txt
+│   └── Lab1_DoHoangPhuc.txt
 ├── scripts/
 │   └── run_all.py
 ├── README.md
