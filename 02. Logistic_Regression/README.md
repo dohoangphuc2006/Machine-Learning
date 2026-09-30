@@ -61,8 +61,8 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 | `code/` | Chứa 2 notebook thực hành và bài tập. Chạy các cell theo thứ tự từ trên xuống để dữ liệu và biến được khởi tạo đầy đủ. |
 | `code/Lab2_DoHoangPhuc.ipynb` | Các bước thực hành: đọc dữ liệu, tính sai số, bình phương tối thiểu, sử dụng Scikit-learn, đánh giá mô hình, Gradient Descent và hồi quy nhiều biến. |
 | `code/Baitaplab2.ipynb` | Chứa lời giải bài tập 1–6, bao gồm mã nguồn, kết quả và phần nhận xét. |
-| `data/sinh_vien.csv` | Bộ dữ liệu gồm 60 căn nhà với các thuộc tính `dien_tich`, `so_phong`, `tuoi_nha` và `gia`. Cần giữ tệp này để chạy chương trình. |
-| `figures/` | Lưu các biểu đồ được tạo trong quá trình thực hành, bao gồm `bai2.png` và `bai3_tuoi_nha.png`. |
+| `data/sinh_vien.csv` | Bộ dữ liệu gồm 120 sinh viên với các thuộc tính `gio_on`, `diem_giua_ky` và `qua_mon`. Cần giữ tệp này để huấn luyện và đánh giá mô hình hồi quy logistic. |
+| `figures/` | Lưu các biểu đồ được tạo trong quá trình thực hành `sigmoid.png`. |
 | `outputs/` | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
 | `scripts/run_all.py` | Script dùng để chạy toàn bộ notebook trong thư mục `code/` và lưu kết quả vào thư mục `outputs/`. |
 | `requirements.txt` | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
@@ -94,10 +94,10 @@ pip install numpy pandas matplotlib scikit-learn notebook nbclient nbformat ipyk
 ### Cách 1 - Khởi động Jupyter Notebook:
 jupyter notebook
 Sau đó mở:
-`Lab1_DoHoangPhuc.ipynb`
+`Lab2_DoHoangPhuc.ipynb`
 hoặc:
 
-`Baitap.ipynb`
+`Baitaplab2.ipynb`
 và chạy từng cell từ trên xuống dưới.
 
 ### Cách 2 - Chạy toàn bộ bằng script
@@ -112,8 +112,8 @@ Script dùng để thực hiện các chương trình được chuẩn bị sẵ
 
 ## ⚠️ Lưu ý
 ### 1. Chạy từ thư mục gốc
-Nên chạy các lệnh từ thư mục: `01. Linear_Regression`
-để đảm bảo đường dẫn: `data/gia_nha.csv` được nhận diện chính xác.
+Nên chạy các lệnh từ thư mục: `02. Logistic_Regression`
+để đảm bảo đường dẫn: `data/sinh_vien.csv` được nhận diện chính xác.
 
 ### 2. Không thay đổi cấu trúc thư mục
 Các notebook sử dụng đường dẫn tương đối đến thư mục `data`, `figures` và `outputs`.
