@@ -14,13 +14,13 @@ Repository này tổng hợp các bài thực hành (**Lab**) của môn **Học
 
 Mỗi tuần học được tổ chức thành một thư mục riêng. Mỗi Lab có một file `README.md` riêng để trình bày:
 
-- Nội dung bài thực hành
-- Mục tiêu
-- Cấu trúc thư mục
-- Hướng dẫn cài đặt và chạy
-- Mã nguồn
-- Kết quả thực nghiệm
-- Hình ảnh và nhận xét
+* Nội dung bài thực hành
+* Mục tiêu
+* Cấu trúc thư mục
+* Hướng dẫn cài đặt và chạy
+* Mã nguồn
+* Kết quả thực nghiệm
+* Hình ảnh và nhận xét
 
 ## 📚 Danh sách bài thực hành
 
