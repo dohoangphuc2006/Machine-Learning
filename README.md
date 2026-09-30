@@ -26,8 +26,8 @@ Mỗi tuần học được tổ chức thành một thư mục riêng. Mỗi La
 
 | Bài | Nội dung | Hướng dẫn |
 | --- | --- | --- |
-| 01 | Hồi quy tuyến tính: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [Bài 01 — Hồi quy tuyến tính](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/README.md) |
-| 02 | Lab 02 | Đang cập nhật |
+| 01 | Hồi quy tuyến tính: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md) |
+| 02 | Hồi quy logistic: phân tích dữ liệu sinh viên, hàm sigmoid, khớp mô hình phân loại, ma trận nhầm lẫn, ngưỡng quyết định và mô hình hai biến. | [02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md) |
 | 03 | Lab 03 | Đang cập nhật |
 | 04 | Lab 04 | Đang cập nhật |
 | 05 | Lab 05 | Đang cập nhật | 
@@ -60,8 +60,8 @@ cd Machine-Learning
 
 ## 📚 Chạy từng Lab
 Mỗi Lab có README riêng chứa hướng dẫn cài đặt và chạy chi tiết.  
-[Bài 01 — Hồi quy tuyến tính](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/bai01_hoi_quy/README.md)  
-
+[01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md)   
+[02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md)  
 
 
 
