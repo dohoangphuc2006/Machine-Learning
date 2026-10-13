@@ -32,13 +32,7 @@ Notebook thực hiện các bước thực hành theo tài liệu Lab, bao gồm
 
 `code/Baitaplab3.ipynb`
 
-Notebook chứa lời giải cho 6 bài tập, bao gồm phần mã nguồn, kết quả tính toán và phần giải thích chi tiết:
-- **Bài tập 1:** Định lý Bayes với 3 nguyên nhân (phân tích xác suất sinh viên theo 3 nhóm chuyên cần).
-- **Bài tập 2:** Xác định các từ có khả năng tố cáo tin nhắn rác mạnh nhất dựa trên tỉ lệ xác suất có điều kiện.
-- **Bài tập 3:** Khảo sát ảnh hưởng của tham số làm trơn Laplace ($\alpha$) đối với hiệu năng mô hình.
-- **Bài tập 4:** Tự xây dựng bộ lọc tin nhắn Naive Bayes thuần túy (sử dụng log-likelihood) trên toàn bộ 300 tin nhắn không dùng thư viện.
-- **Bài tập 5:** Khảo sát hậu quả khi chọn sai biến thể Naive Bayes (dùng MultinomialNB thay vì GaussianNB cho biến liên tục).
-- **Bài tập 6:** Phân tích ảnh hưởng của hiện tượng mất cân bằng lớp và vai trò của xác suất tiên nghiệm (Prior Probability).
+Notebook chứa lời giải cho 6 bài tập, bao gồm phần mã nguồn, kết quả tính toán và phần giải thích chi tiết
 
 ## 📁 Cấu trúc thư mục
 
