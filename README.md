@@ -26,9 +26,9 @@ Mỗi tuần học được tổ chức thành một thư mục riêng. Mỗi La
 
 | Bài | Nội dung | Hướng dẫn |
 | --- | --- | --- |
-| 01 | Hồi quy tuyến tính: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md) |
-| 02 | Hồi quy logistic: phân tích dữ liệu sinh viên, hàm sigmoid, khớp mô hình phân loại, ma trận nhầm lẫn, ngưỡng quyết định và mô hình hai biến. | [02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md) |
-| 03 | Lab 03 | Đang cập nhật |
+| 01 | **Hồi quy tuyến tính**: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md) |
+| 02 | **Hồi quy logistic**: phân tích dữ liệu sinh viên, hàm sigmoid, khớp mô hình phân loại, ma trận nhầm lẫn, ngưỡng quyết định và mô hình hai biến. | [02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md) |
+| 03 | **Naive Bayes**: định lý Bayes, tiền xử lý văn bản với CountVectorizer, bộ lọc tin nhắn rác MultinomialNB, hiện tượng số 0 và làm trơn Laplace, GaussianNB cho biến liên tục. | [03. Naive_Bayes](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/03.%20Naive_Bayes/README.md) |
 | 04 | Lab 04 | Đang cập nhật |
 | 05 | Lab 05 | Đang cập nhật | 
 | 06 | Lab 06 | Đang cập nhật | 
@@ -36,20 +36,34 @@ Mỗi tuần học được tổ chức thành một thư mục riêng. Mỗi La
 ## 📂 Cấu trúc repository
 ```text
 Machine-Learning/
-├── bai01_hoi_quy/
+├── 01. Linear_Regression/
 │   ├── code/                 # Notebook thực hành và bài tập
 │   ├── data/                 # Dữ liệu gia_nha.csv
 │   ├── figures/              # Biểu đồ PNG
 │   ├── outputs/              # Nhật ký kết quả
-│   ├── scripts/
-│   │   └── run_all.py        # Chạy toàn bộ notebook của bài 01
+│   ├── scripts/              # run_all.py
 │   ├── requirements.txt
+│   └── README.md
+├── 02. Logistic_Regression/
+│   ├── code/                 # Notebook thực hành và bài tập
+│   ├── data/                 # Dữ liệu sinh_vien.csv
+│   ├── figures/              # Biểu đồ PNG
+│   ├── outputs/              # Nhật ký kết quả
+│   ├── scripts/              # run_all.py
+│   ├── requirements.txt
+│   └── README.md
+├── 03. Naive_Bayes/
+│   ├── code/                 # Notebook thực hành và bài tập
+│   ├── data/                 # Dữ liệu sinh_vien.csv, tin_nhan.csv
+│   ├── figures/              # Thư mục lưu biểu đồ
+│   ├── outputs/              # Nhật ký kết quả
+│   ├── scripts/              # run_all.py, requirements.txt
 │   └── README.md
 ├── .gitignore
 └── README.md
 ```
 
-## 🚀 Tải và chạy Lab 01
+## 🚀 Tải và chạy các bài thực hành
 
 Clone repository hoặc chọn **Code → Download ZIP**, sau đó giải nén toàn bộ để giữ nguyên cấu trúc thư mục.
 
@@ -59,10 +73,7 @@ cd Machine-Learning
 ```
 
 ## 📚 Chạy từng Lab
-Mỗi Lab có README riêng chứa hướng dẫn cài đặt và chạy chi tiết.  
-[01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md)   
-[02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md)  
-
-
-
-
+Mỗi Lab có README riêng chứa hướng dẫn cài đặt và chạy chi tiết:  
+- [01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md)   
+- [02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md)  
+- [03. Naive_Bayes](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/03.%20Naive_Bayes/README.md)  

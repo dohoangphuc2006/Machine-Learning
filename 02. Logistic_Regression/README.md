@@ -30,24 +30,23 @@ Hai notebook chính được sử dụng trong bài:
 
 `code/Lab2_DoHoangPhuc.ipynb`
 
-Notebook thực hiện các bước thực hành theo tài liệu Lab, bao gồm quá trình đọc dữ liệu, xây dựng mô hình, tính toán sai số, đánh giá mô hình và Gradient Descent.
+Notebook thực hiện các bước thực hành theo tài liệu Lab, bao gồm quá trình đọc dữ liệu, xây dựng hàm sigmoid, huấn luyện mô hình logistic bằng Scikit-learn, đánh giá mô hình bằng bốn thước đo, điều chỉnh ngưỡng phân loại và hồi quy logistic nhiều biến.
 
 `code/Baitaplab2.ipynb`
 
-Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ liệu, xây dựng mô hình, kết quả và nhận xét.
+Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ liệu, xây dựng mô hình, kết quả và nhận xét chi tiết.
 
 ## 📁 Cấu trúc thư mục
 
 ```text
-01. Linear_Regression/
+02. Logistic_Regression/
 ├── code/
 │   ├── Baitaplab2.ipynb
 │   └── Lab2_DoHoangPhuc.ipynb
 ├── data/
 │   └── sinh_vien.csv
 ├── figures/
-│   ├── sigmoid.png
-│   
+│   └── sigmoid.png
 ├── outputs/
 │   ├── Baitaplab2.txt
 │   └── Lab2_DoHoangPhuc.txt
@@ -59,7 +58,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 | Thư mục / tệp | Chức năng |
 | --- | --- |
 | `code/` | Chứa 2 notebook thực hành và bài tập. Chạy các cell theo thứ tự từ trên xuống để dữ liệu và biến được khởi tạo đầy đủ. |
-| `code/Lab2_DoHoangPhuc.ipynb` | Các bước thực hành: đọc dữ liệu, tính sai số, bình phương tối thiểu, sử dụng Scikit-learn, đánh giá mô hình, Gradient Descent và hồi quy nhiều biến. |
+| `code/Lab2_DoHoangPhuc.ipynb` | Các bước thực hành: đọc dữ liệu, tính sigmoid, xây dựng mô hình logistic, đánh giá bằng 4 thước đo, điều chỉnh ngưỡng và hồi quy nhiều biến. |
 | `code/Baitaplab2.ipynb` | Chứa lời giải bài tập 1–6, bao gồm mã nguồn, kết quả và phần nhận xét. |
 | `data/sinh_vien.csv` | Bộ dữ liệu gồm 120 sinh viên với các thuộc tính `gio_on`, `diem_giua_ky` và `qua_mon`. Cần giữ tệp này để huấn luyện và đánh giá mô hình hồi quy logistic. |
 | `figures/` | Lưu các biểu đồ được tạo trong quá trình thực hành `sigmoid.png`. |

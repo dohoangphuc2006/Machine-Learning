@@ -1,0 +1,107 @@
+--- Cell 1 ---
+Da doc du lieu thanh cong!
+Sinh vien: data\sinh_vien.csv (120, 3)
+Tin nhan: data\tin_nhan.csv (300, 2)
+
+--- Cell 3 ---
+Xac suat sinh vien thuoc tung nhom khi da qua mon:
+ Hoc deu: 0.6376
+ Hoc don: 0.2819
+ It hoc: 0.0805
+
+Tong ba xac suat: 1.0000
+Kiem tra: Tong cac xac suat bang 1.
+
+Nhận xét: Trong nhóm sinh viên đã qua môn, nhóm Học đều chiếm tỷ lệ cao nhất với xác suất 0,6376 (63,76%), tiếp theo là nhóm Học dồn với 0,2819 (28,19%). 
+Nhóm Ít học chiếm tỷ lệ thấp nhất, chỉ 0,0805 (8,05%). Tổng ba xác suất bằng 1 (100%), cho thấy các xác suất đã được chuẩn hóa chính xác. 
+Kết quả cho thấy sinh viên học đều chiếm phần lớn trong nhóm sinh viên đã qua môn.
+
+--- Cell 5 ---
+So tin nhan: 300
+
+5 tu to cao tin rac manh nhat:
+ mãi             3.2034
+ tay             2.9056
+ ngay            2.6618
+ miễn            2.4795
+ trúng           2.3742
+
+5 tu cho thay tin thuong manh nhat:
+ lớp             -2.6122
+ em              -2.5618
+ bài             -2.2946
+ báo             -2.2741
+ phòng           -2.2741
+
+Nhận xét:
+Trong 300 tin nhắn, các từ “mãi”, “tay”, “ngay”, “miễn” và “trúng” có điểm số cao nhất cho thấy khả năng xuất hiện trong tin nhắn rác, trong đó từ “mãi” có điểm số cao nhất là 3.2034.
+Ngược lại, các từ “lớp”, “em”, “bài”, “báo” và “phòng” có điểm số âm, nghiêng về nhóm tin nhắn thông thường; từ “lớp” có điểm số thấp nhất là -2.6122.
+Kết quả cho thấy các từ liên quan đến nội dung quảng cáo, ưu đãi có thể là dấu hiệu nhận biết tin nhắn rác, trong khi các từ thường dùng trong giao tiếp học tập có xu hướng xuất hiện trong tin nhắn thông thường.
+Tuy nhiên, cần kết hợp nhiều từ và ngữ cảnh để phân loại chính xác hơn.
+
+--- Cell 7 ---
+Ket qua voi cac gia tri alpha:
+   Alpha     Accuracy    Precision       Recall
+   0.001       0.9467       1.0000       0.8667
+   0.100       0.9467       1.0000       0.8667
+   1.000       0.9467       1.0000       0.8667
+  10.000       0.9467       1.0000       0.8667
+ 100.000       0.9467       1.0000       0.8667
+
+Nhận xét:
+Khi thay đổi giá trị alpha từ 0.001 đến 100, các chỉ số Accuracy, Precision và Recall đều không thay đổi, lần lượt đạt 0.9467, 1.0000 và 0.8667.
+Điều này cho thấy mô hình Naive Bayes hoạt động ổn định với các giá trị alpha được thử nghiệm trên tập dữ liệu này.
+Precision đạt 100% cho thấy các tin nhắn được dự đoán là tin rác đều thực sự là tin rác trong tập kiểm tra.
+Tuy nhiên, Recall đạt 86,67% cho thấy mô hình vẫn bỏ sót một số tin nhắn rác. Nhìn chung, mô hình có độ chính xác cao, nhưng cần đánh giá thêm với các tập dữ liệu khác để xác định giá trị alpha phù hợp nhất.
+
+--- Cell 9 ---
+So mau train/test: 225/75
+So tu trong tu dien tu viet: 40
+So tu trong tu dien thu vien: 40
+Accuracy tu viet: 0.9467
+Accuracy MultinomialNB: 0.9467
+So du doan khac nhau: 0
+
+Giải thích: Hai phương pháp sử dụng cùng tập dữ liệu huấn luyện và kiểm tra,
+cùng quy tắc tách từ, xác suất tiên nghiệm và giá trị alpha = 1.
+Cả hai đều bỏ qua các từ không có trong từ điển.
+Việc cộng log xác suất giúp tránh hiện tượng tràn số dưới khi xử lý tin nhắn dài.
+
+Nhận xét: Bộ lọc tự viết và mô hình MultinomialNB đều đạt Accuracy = 0,9467 (94,67%), với số lượng từ trong từ điển của cả hai phương pháp đều là 40.
+Hai mô hình không có dự đoán khác nhau trên tập kiểm tra gồm 75 tin nhắn.
+Kết quả cho thấy bộ lọc tự viết đã triển khai chính xác các bước đếm từ, làm trơn Laplace với \(lpha = 1\), tính xác suất tiên nghiệm và cộng log xác suất.
+Việc sử dụng tổng log xác suất giúp hạn chế hiện tượng tràn số dưới khi xử lý tin nhắn dài.
+Như vậy, kết quả của bài tập chứng minh cách cài đặt thủ công hoạt động tương đương với MultinomialNB trên tập dữ liệu đang xét.
+<>:69: SyntaxWarning: invalid escape sequence '\('
+<>:69: SyntaxWarning: invalid escape sequence '\('
+C:\Users\Admin\AppData\Local\Temp\ipykernel_5472\386455632.py:69: SyntaxWarning: invalid escape sequence '\('
+  print("Kết quả cho thấy bộ lọc tự viết đã triển khai chính xác các bước đếm từ, làm trơn Laplace với \(\alpha = 1\), tính xác suất tiên nghiệm và cộng log xác suất.")
+
+--- Cell 11 ---
+MultinomialNB: accuracy = 0.8000
+GaussianNB: accuracy = 0.9000
+
+Nhận xét:
+Mô hình MultinomialNB đạt Accuracy = 0,8000 (80%), trong khi mô hình GaussianNB đạt Accuracy = 0,9000 (90%), cao hơn 10 điểm phần trăm.
+Kết quả cho thấy GaussianNB hoạt động hiệu quả hơn trên bộ dữ liệu sinh viên với hai đặc trưng gio_on và diem_giua_ky.
+Nguyên nhân là MultinomialNB phù hợp với dữ liệu đếm tần suất, còn GaussianNB phù hợp hơn với các đặc trưng số liên tục.
+Vì vậy, dù MultinomialNB vẫn chạy được, việc sử dụng mô hình này không phù hợp về mặt nguyên tắc với bản chất dữ liệu của bài toán.
+
+--- Cell 13 ---
+So tin tung lop trong bo du lieu moi:
+la_rac
+0    180
+1     20
+Name: count, dtype: int64
+Prior lop rac trong tap hoc = 0.1000
+Ma tran: TN=45, FP=0, FN=1, TP=4
+Accuracy = 0.9800
+Recall lop rac = 0.8000
+Moc doan tat ca la thuong: accuracy = 0.9000, recall rac = 0.0000
+
+Nhận xét:
+Bộ lọc đạt Accuracy = 0,9800 (98%) và Recall của lớp rác = 0,8000 (80%).
+Điều này cho thấy mô hình phân loại đúng 98% tổng số tin nhắn và phát hiện được 80% tin rác thực tế, tuy nhiên vẫn bỏ sót 1 tin rác (FN = 1).
+Đáng chú ý, nếu dự đoán tất cả tin nhắn đều là tin thường, mô hình vẫn đạt Accuracy = 90% do dữ liệu mất cân bằng, nhưng Recall của lớp rác bằng 0%.
+Vì vậy, Accuracy không đủ để đánh giá chất lượng bộ lọc khi lớp rác chiếm tỷ lệ nhỏ. Cần kết hợp Recall và số lượng tin rác bị bỏ sót (FN) để đánh giá khả năng phát hiện tin rác của mô hình.
+
