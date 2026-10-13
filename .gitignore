@@ -10,3 +10,9 @@ env/
 *.ipynb.tmp
 .DS_Store
 Thumbs.db
+
+# VS Code
+.vscode/
+
+# PDF giáo trình (nếu không cần đưa lên repo)
+*.pdf
