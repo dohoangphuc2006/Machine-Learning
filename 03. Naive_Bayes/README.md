@@ -14,14 +14,14 @@ Bài thực hành tìm hiểu và áp dụng thuật toán phân loại Naive Ba
 
 Nội dung bao gồm:
 
-Đọc và khám phá kho tin nhắn bằng Pandas  
-Biến đổi dữ liệu văn bản thành bảng số bằng CountVectorizer (Bag of Words)  
-Tính định lý Bayes bằng tay (Prior, Likelihood, Posterior, Evidence)  
-Huấn luyện mô hình Multinomial Naive Bayes (MultinomialNB) bằng Scikit-learn  
-Đánh giá mô hình bằng Confusion Matrix, Accuracy, Precision và Recall  
-Tự cài đặt Naive Bayes từ đầu (không dùng thư viện) để thấy hiện tượng xác suất bằng 0 và kỹ thuật làm trơn Laplace (Laplace Smoothing)  
-Áp dụng Gaussian Naive Bayes (GaussianNB) cho đặc trưng liên tục và so sánh với Hồi quy Logistic  
-Thực hiện các bài tập áp dụng từ 1 đến 6  
+* Đọc và khám phá kho tin nhắn bằng Pandas  
+* Biến đổi dữ liệu văn bản thành bảng số bằng CountVectorizer (Bag of Words)  
+* Tính định lý Bayes bằng tay (Prior, Likelihood, Posterior, Evidence)  
+* Huấn luyện mô hình Multinomial Naive Bayes (MultinomialNB) bằng Scikit-learn  
+* Đánh giá mô hình bằng Confusion Matrix, Accuracy, Precision và Recall  
+* Tự cài đặt Naive Bayes từ đầu (không dùng thư viện) để thấy hiện tượng xác suất bằng 0 và kỹ thuật làm trơn Laplace (Laplace Smoothing)  
+* Áp dụng Gaussian Naive Bayes (GaussianNB) cho đặc trưng liên tục và so sánh với Hồi quy Logistic  
+* Thực hiện các bài tập áp dụng từ 1 đến 6  
 
 ## 📂 Nội dung mã nguồn
 Hai notebook chính được sử dụng trong bài:
@@ -55,9 +55,9 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần mã nguồn, k�
 │   ├── Baitaplab3.txt
 │   └── Lab3_DoHoangPhuc.txt
 ├── scripts/
-│   ├── requirements.txt
 │   └── run_all.py
-└── README.md
+├── README.md
+└── requirements.txt
 ```
 | Thư mục / tệp | Chức năng |
 | --- | --- |
@@ -69,7 +69,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần mã nguồn, k�
 | `figures/` | Thư mục lưu các biểu đồ được tạo trong quá trình thực hành (nếu có). |
 | `outputs/` | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
 | `scripts/run_all.py` | Script dùng để chạy toàn bộ notebook trong thư mục `code/` và lưu kết quả vào thư mục `outputs/`. |
-| `scripts/requirements.txt` | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
+| `requirements.txt` | Danh sách các thư viện Python cần thiết để chạy notebook và script. |
 | `README.md` | Tài liệu hướng dẫn, giới thiệu nội dung bài thực hành, cấu trúc dự án và cách chạy chương trình. |
 
 ## 🛠️ Yêu cầu môi trường
@@ -86,7 +86,7 @@ python --version
 
 Từ thư mục gốc của project, chạy:
 ```text
-pip install -r scripts/requirements.txt
+pip install -r requirements.txt
 ```
 
 ### Cách 2 – Cài đặt thủ công qua cmd
@@ -130,5 +130,5 @@ Nếu xuất hiện lỗi:
 
 hãy chạy:
 ```text
-pip install -r scripts/requirements.txt
+pip install -r requirements.txt
 ```

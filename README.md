@@ -57,7 +57,8 @@ Machine-Learning/
 │   ├── data/                 # Dữ liệu sinh_vien.csv, tin_nhan.csv
 │   ├── figures/              # Thư mục lưu biểu đồ
 │   ├── outputs/              # Nhật ký kết quả
-│   ├── scripts/              # run_all.py, requirements.txt
+│   ├── scripts/              # run_all.py
+│   ├── requirements.txt
 │   └── README.md
 ├── .gitignore
 └── README.md
