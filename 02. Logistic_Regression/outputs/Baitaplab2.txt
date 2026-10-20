@@ -8,8 +8,8 @@ Diem giua ky phan biet rat tot hai nhom vi ty le qua mon cua nhom
 diem cao (>= 7.0) vuot troi hon han so voi nhom con lai.
 
 --- Cell 5 ---
-Da ve va luu bieu do vao tep sigmoid.png thanh cong.
 [Biểu đồ hiển thị trong notebook]
+Đã vẽ và lưu biểu đồ vào tệp sigmoid.png thành công.
 
 --- Cell 8 ---
 Ket qua du doan cho cac moc gio on:
@@ -33,8 +33,8 @@ Recall    = 0.9444
 F1-score  = 0.8947
 
 --- Cell 14 ---
-Bang do tim nguong theo F1:
- Nguong       F1-score
+Bảng dò tìm ngưỡng theo F1-score:
+ Ngưỡng       F1-score
   0.05         0.7826
   0.10         0.8182
   0.15         0.8182
@@ -55,11 +55,14 @@ Bang do tim nguong theo F1:
   0.90         0.5600
   0.95         0.4348
 
-Nguong cho F1 cao nhat la: 0.60 voi F1 = 0.9412
+Ngưỡng cho F1 cao nhất là: 0.60 với F1 = 0.9412
+(So với ngưỡng mặc định 0.5: F1 = 0.8947)
 
-Nhan xet:
-Nguong toi uu theo F1 co the khong nhat thiet phai bang dung 0.5.
-F1 cao nhat dat duoc o khoang nguong can bang tot nhat giua Precision va Recall.
+Nhận xét:
+- Ngưỡng tốt nhất theo F1 KHÔNG bằng 0.5, mà đạt tại ngưỡng 0.60 với F1 = 0.9412 (vượt trội hơn mức 0.8947 tại ngưỡng 0.5).
+- Nguyên nhân: Ngưỡng 0.5 chỉ là mốc phân đôi xác suất thông thường. Trên tập dữ liệu này, việc nâng ngưỡng lên 0.60
+  giúp loại bỏ hoàn toàn các ca báo nhầm (Precision đạt 1.0000) mà vẫn giữ được độ bao phủ cao (Recall = 0.8889),
+  nhờ đó chỉ số F1 đạt mức tối ưu nhất.
 
 --- Cell 17 ---
 So sanh hai lop duong:

@@ -40,7 +40,7 @@ Kết quả cho thấy các từ liên quan đến nội dung quảng cáo, ưu 
 Tuy nhiên, cần kết hợp nhiều từ và ngữ cảnh để phân loại chính xác hơn.
 
 --- Cell 7 ---
-Ket qua voi cac gia tri alpha:
+Kết quả đánh giá mô hình với các giá trị alpha:
    Alpha     Accuracy    Precision       Recall
    0.001       0.9467       1.0000       0.8667
    0.100       0.9467       1.0000       0.8667
@@ -48,11 +48,17 @@ Ket qua voi cac gia tri alpha:
   10.000       0.9467       1.0000       0.8667
  100.000       0.9467       1.0000       0.8667
 
-Nhận xét:
-Khi thay đổi giá trị alpha từ 0.001 đến 100, các chỉ số Accuracy, Precision và Recall đều không thay đổi, lần lượt đạt 0.9467, 1.0000 và 0.8667.
-Điều này cho thấy mô hình Naive Bayes hoạt động ổn định với các giá trị alpha được thử nghiệm trên tập dữ liệu này.
-Precision đạt 100% cho thấy các tin nhắn được dự đoán là tin rác đều thực sự là tin rác trong tập kiểm tra.
-Tuy nhiên, Recall đạt 86,67% cho thấy mô hình vẫn bỏ sót một số tin nhắn rác. Nhìn chung, mô hình có độ chính xác cao, nhưng cần đánh giá thêm với các tập dữ liệu khác để xác định giá trị alpha phù hợp nhất.
+--- NHẬN XÉT VÀ GIẢI THÍCH CHI TIẾT ---
+1. Kết quả thực nghiệm trên tập kiểm tra:
+   - Khi alpha thay đổi từ 0.001 đến 100.0, cả ba chỉ số Accuracy, Precision và Recall vẫn giữ nguyên lần lượt là 0.9467, 1.0000 và 0.8667.
+   - Điều này cho thấy trên tập dữ liệu này, các từ tố cáo tin rác xuất hiện với tần suất đủ mạnh và rõ ràng, khiến thứ hạng xác suất hậu nghiệm giữa hai lớp không bị xáo trộn ở dải alpha này.
+
+2. Trả lời câu hỏi: Khi alpha quá lớn thì chuyện gì xảy ra, và vì sao?
+   - Theo công thức làm trơn Laplace: P(từ j | lớp k) = (đếmjk + alpha) / (tổng_từk + alpha * V).
+   - Khi alpha rất lớn (alpha >> 1), số hạng alpha ở tử và alpha * V ở mẫu sẽ lấn át hoàn toàn số đếm thực tế (đếmjk).
+   - Kết quả là xác suất P(từ j | lớp k) của mọi từ trong mọi lớp đều tiến xấp xỉ về 1/V (tất cả xác suất từ xích lại gần nhau và bằng nhau).
+   - Khi các từ không còn khả năng phân biệt lớp nữa, phần tích xác suất từ trở nên vô tác dụng.
+   - Lúc này quyết định phân loại của Naive Bayes sẽ phụ thuộc hoàn toàn vào xác suất tiên nghiệm P(lớp), tức mô hình sẽ thiên lệch tuyệt đối và đoán toàn bộ mẫu vào lớp chiếm đa số.
 
 --- Cell 9 ---
 So mau train/test: 225/75
@@ -69,23 +75,30 @@ Việc cộng log xác suất giúp tránh hiện tượng tràn số dưới kh
 
 Nhận xét: Bộ lọc tự viết và mô hình MultinomialNB đều đạt Accuracy = 0,9467 (94,67%), với số lượng từ trong từ điển của cả hai phương pháp đều là 40.
 Hai mô hình không có dự đoán khác nhau trên tập kiểm tra gồm 75 tin nhắn.
-Kết quả cho thấy bộ lọc tự viết đã triển khai chính xác các bước đếm từ, làm trơn Laplace với \(lpha = 1\), tính xác suất tiên nghiệm và cộng log xác suất.
+Kết quả cho thấy bộ lọc tự viết đã triển khai chính xác các bước đếm từ, làm trơn Laplace với alpha = 1, tính xác suất tiên nghiệm và cộng log xác suất.
 Việc sử dụng tổng log xác suất giúp hạn chế hiện tượng tràn số dưới khi xử lý tin nhắn dài.
 Như vậy, kết quả của bài tập chứng minh cách cài đặt thủ công hoạt động tương đương với MultinomialNB trên tập dữ liệu đang xét.
-<>:69: SyntaxWarning: invalid escape sequence '\('
-<>:69: SyntaxWarning: invalid escape sequence '\('
-C:\Users\Admin\AppData\Local\Temp\ipykernel_5472\386455632.py:69: SyntaxWarning: invalid escape sequence '\('
-  print("Kết quả cho thấy bộ lọc tự viết đã triển khai chính xác các bước đếm từ, làm trơn Laplace với \(\alpha = 1\), tính xác suất tiên nghiệm và cộng log xác suất.")
 
 --- Cell 11 ---
-MultinomialNB: accuracy = 0.8000
-GaussianNB: accuracy = 0.9000
+--- KẾT QUẢ HUẤN LUYỆN HAI BIẾN THỂ NAIVE BAYES ---
+Chương trình chạy trơn tru, KHÔNG hề báo lỗi ngoại lệ nào.
 
-Nhận xét:
-Mô hình MultinomialNB đạt Accuracy = 0,8000 (80%), trong khi mô hình GaussianNB đạt Accuracy = 0,9000 (90%), cao hơn 10 điểm phần trăm.
-Kết quả cho thấy GaussianNB hoạt động hiệu quả hơn trên bộ dữ liệu sinh viên với hai đặc trưng gio_on và diem_giua_ky.
-Nguyên nhân là MultinomialNB phù hợp với dữ liệu đếm tần suất, còn GaussianNB phù hợp hơn với các đặc trưng số liên tục.
-Vì vậy, dù MultinomialNB vẫn chạy được, việc sử dụng mô hình này không phù hợp về mặt nguyên tắc với bản chất dữ liệu của bài toán.
+MultinomialNB (Dùng sai biến thể): accuracy = 0.8000
+GaussianNB    (Dùng đúng biến thể): accuracy = 0.9000
+
+--- TRẢ LỜI CÁC CÂU HỎI CỦA BÀI TẬP 5 ---
+1. Chương trình có báo lỗi không?
+   -> KHÔNG báo lỗi. Chương trình vẫn chạy trơn tru và hoàn thành huấn luyện bình thường.
+   -> Đây là dạng lỗi nguy hiểm nhất trong học máy: 'lỗi im lặng' (silent error). Thư viện chỉ thấy mảng số không âm nên cứ tính toán, không hiểu được ngữ nghĩa dữ liệu.
+
+2. Con số accuracy ra bao nhiêu?
+   -> MultinomialNB đạt Accuracy = 0.8000 (80.00%).
+   -> GaussianNB đạt Accuracy = 0.9000 (90.00%), cao hơn tới 10 điểm phần trăm.
+
+3. Vì sao dùng MultinomialNB ở đây là sai về nguyên tắc?
+   -> Về bản chất toán học: MultinomialNB được thiết kế dành riêng cho dữ liệu đếm rời rạc (tần suất xuất hiện của từ, số đếm nguyên không âm), dựa trên phân phối đa thức.
+   -> Trong khi đó, 'gio_on' (ví dụ 12.89 giờ) và 'diem_giua_ky' (ví dụ 7.7 điểm) là các đại lượng thực liên tục (continuous numbers).
+   -> Dữ liệu liên tục có xu hướng tuân theo phân phối chuẩn (Gaussian distribution, đường cong hình chuông). Do đó, GaussianNB mới là biến thể chuẩn xác về nguyên tắc khoa học.
 
 --- Cell 13 ---
 So tin tung lop trong bo du lieu moi:
