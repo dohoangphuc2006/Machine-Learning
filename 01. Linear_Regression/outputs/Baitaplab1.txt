@@ -1,0 +1,116 @@
+--- Cell 1 ---
+Kich thuoc bang (so dong, so cot): (60, 4)
+
+Nam dong dau tien:
+   dien_tich  so_phong  tuoi_nha   gia
+0       35.5         1        18  3.00
+1       37.6         2         7  3.87
+2       49.4         2        20  4.25
+3       49.0         2        16  4.60
+4       49.9         1        12  3.99
+
+Ten cac cot: ['dien_tich', 'so_phong', 'tuoi_nha', 'gia']
+
+Thong ke nhanh cot dien_tich va cot gia:
+       dien_tich    gia
+count      60.00  60.00
+mean       77.73   6.49
+std        20.22   1.64
+min        35.50   3.00
+25%        63.02   5.16
+50%        75.10   6.40
+75%        91.88   7.70
+max       117.50   9.74
+
+So o bi thieu trong tung cot:
+dien_tich    0
+so_phong     0
+tuoi_nha     0
+gia          0
+dtype: int64
+
+--- Cell 3 ---
+Số căn có diện tích > 100 m²: 10
+Giá trung bình của nhóm căn hộ lớn (> 100 m²): 8.9620 tỷ đồng
+
+Nhận xét:
+- Trong tổng số 60 căn hộ của bộ dữ liệu, có 10 căn có diện tích lớn hơn 100 m² (chiếm 16.7%).
+- Mức giá trung bình của nhóm căn hộ lớn này là 8.9620 tỷ đồng, cao hơn rõ rệt so với mức giá trung bình của toàn bộ 60 căn (6.49 tỷ đồng).
+- Điều này hoàn toàn phù hợp với thực tế thị trường: diện tích sàn càng rộng thì tổng giá trị căn nhà càng lớn.
+
+--- Cell 5 ---
+[Biểu đồ hiển thị trong notebook]
+Nhận xét:
+- Biểu đồ cho thấy xu hướng đồng biến rõ rệt: số lượng phòng ngủ càng nhiều thì giá bán căn hộ càng cao.
+- Căn 1 phòng ngủ có giá tập trung trong khoảng 3 - 4 tỷ đồng, trong khi căn 4 phòng ngủ có giá từ 7.5 đến gần 10 tỷ đồng.
+- Tuy nhiên, với các căn có cùng số phòng (ví dụ cùng 2 phòng), giá vẫn có sự chênh lệch đáng kể do diện tích và tuổi nhà khác nhau.
+
+--- Cell 7 ---
+Hệ số góc w = -0.037858
+Hệ số chặn b = 6.983593
+[Biểu đồ hiển thị trong notebook]
+
+--- NHẬN XÉT VÀ GIẢI THÍCH CHI TIẾT ---
+1. Nhận xét dấu: Hệ số góc w mang dấu âm (w = -0.037858).
+2. Giải thích vì sao w mang dấu âm:
+   - Hệ số w = -0.037858 cho biết cứ mỗi năm tuổi nhà tăng thêm, giá bán trung bình sẽ giảm khoảng 37.86 triệu đồng.
+   - Dấu âm thể hiện quan hệ nghịch biến rất hợp lý: nhà càng cũ thì chất lượng công trình, hạ tầng nội thất
+     càng bị hao mòn theo thời gian, dẫn đến giá trị thẩm mỹ và giá trị sử dụng giảm dần.
+3. Trả lời câu hỏi thêm (độ tin cậy của w và quan hệ chặt chẽ):
+   - Quan sát biểu đồ phân tán ta thấy các điểm dữ liệu KHÔNG bám sát quanh đường thẳng như ở biểu đồ diện tích,
+     mà nằm phân tán rải rác rất rộng ở mọi mức tuổi nhà.
+   - Do đó, con số w này có độ tin cậy rất thấp trong việc dự đoán giá (sai số MSE rất lớn, R² thấp).
+   - Kết luận quan trọng: Một hệ số có dấu đúng theo trực giác CHƯA ĐỦ để kết luận hai đại lượng có quan hệ chặt chẽ.
+     Cần phải kiểm tra thêm độ tản mát của dữ liệu quanh đường hồi quy và chỉ số R² trước khi đưa ra kết luận.
+
+--- Cell 9 ---
+R² trên tập kiểm tra (mô hình 2 biến: dien_tich + so_phong): 0.9698
+R² trên tập kiểm tra (mô hình 1 biến: dien_tich)          : 0.9622
+Mức chênh lệch R²                                          : +0.0076
+
+--- SO SÁNH VÀ ĐÁNH GIÁ ---
+Nhận xét:
+- R² tăng từ 0.9622 lên 0.9698, tức giải thích thêm được khoảng 0.76% biến động giá.
+- Việc thêm cột so_phong là CÓ ĐÁNG vì:
+  1. Cải thiện được độ chính xác dự báo (R² tăng lên gần 0.97).
+  2. Số phòng ngủ mang thông tin thực tế về công năng sử dụng của căn hộ, bổ sung cho diện tích sàn.
+  3. Tuy nhiên mức tăng không quá lớn (khoảng 0.76%) vì diện tích và số phòng vốn đi kèm khá chặt với nhau,
+     diện tích đã gánh phần lớn năng lực giải thích giá bán.
+
+--- Cell 11 ---
+Giá trị MSE ở vòng lặp thứ 200 với tốc độ học 0.001 : 20.2175
+Giá trị MSE ở vòng lặp thứ 200 với tốc độ học 1.02  : 2.9039e+08
+
+--- GIẢI THÍCH CHI TIẾT VÌ SAO HAI CON SỐ KHÁC NHAU ---
+1. Với tốc độ học = 0.001 (Quá nhỏ):
+   - Bước chân mỗi vòng lặp quá ngắn (như người xuống núi bằng bước 1 cm).
+   - Sau 200 vòng lặp, thuật toán vẫn còn ở lưng chừng dốc và chưa kịp đi tới đáy (MSE còn 20.2175, rất xa mức tối ưu 0.1790).
+   - Muốn tới đáy với tốc độ này thì phải chạy hàng nghìn vòng, gây tốn thời gian tính toán không cần thiết.
+
+2. Với tốc độ học = 1.02 (Quá lớn):
+   - Bước chân quá dài khiến thuật toán từ sườn bên này nhảy vọt qua đáy sang tận sườn bên kia ở vị trí cao hơn điểm cũ.
+   - Ở các vòng lặp tiếp theo, nó tiếp tục nhảy xa hơn nữa, sai số bị thổi phồng theo cấp số nhân (hiện tượng phân kỳ - divergence).
+   - Kết quả là ở vòng 200, MSE bùng nổ lên con số khổng lồ (2.9039e+08). Đây là kết quả tính toán đúng bản chất toán học chứ không phải máy hỏng.
+
+3. Kết luận:
+   - Tốc độ học (learning rate) là một siêu tham số quan trọng cần chọn cẩn thận.
+   - Với bài toán này, tốc độ học khoảng 0.1 là vừa vặn nhất, giúp mô hình hội tụ êm ái về đáy sai số 0.1790 chỉ sau vài chục vòng.
+
+--- Cell 13 ---
+--- KẾT QUẢ DỰ ĐOÁN CHO BA CĂN HỘ ---
+-> Diện tích:  60 m² | Giá dự đoán: 5.104 tỷ đồng
+
+-> Diện tích:  80 m² | Giá dự đoán: 6.671 tỷ đồng
+
+[CẢNH BÁO] Diện tích 200 m² nằm ngoài khoảng dữ liệu đã học (35.5 - 117.5 m²).
+           Mô hình đang thực hiện ngoại suy (extrapolation), kết quả có thể không đáng tin cậy!
+-> Diện tích: 200 m² | Giá dự đoán: 16.075 tỷ đồng
+
+--- GIẢI THÍCH LÝ DO CẢNH BÁO ---
+1. Với căn 80 m²: Dự đoán ra đúng 6.671 tỷ đồng, khớp hoàn toàn với con số ở mục 5 của tài liệu.
+   Hai căn 60 m² và 80 m² nằm gọn trong khoảng dữ liệu [35.5, 117.5] m² nên đây là phép nội suy (interpolation) đáng tin cậy.
+2. Với căn 200 m²: Căn lớn nhất trong 60 căn của ta chỉ rộng 117.5 m², nghĩa là máy chưa từng nhìn thấy căn nào rộng tới 200 m².
+   Đoán giá cho căn 200 m² là phép ngoại suy (extrapolation) – máy chỉ kéo dài đường thẳng đã học trên giấy.
+   Ngoài đời thực, căn 200 m² thường là căn hộ penthouse hoặc biệt thự cao cấp với đơn giá và cách định giá hoàn toàn khác,
+   do đó con số 16.075 tỷ đồng không thể dùng để tham khảo mua bán thật.
+
