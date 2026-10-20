@@ -32,7 +32,7 @@ Hai notebook chính được sử dụng trong bài:
 
 Notebook thực hiện các bước thực hành theo tài liệu Lab, bao gồm quá trình đọc dữ liệu, xây dựng mô hình, tính toán sai số, đánh giá mô hình và Gradient Descent.
 
-`code/Baitap.ipynb`
+`code/Baitaplab1.ipynb`
 
 Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ liệu, xây dựng mô hình, kết quả và nhận xét.
 
@@ -41,7 +41,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 ```text
 01. Linear_Regression/
 ├── code/
-│   ├── Baitap.ipynb
+│   ├── Baitaplab1.ipynb
 │   └── Lab1_DoHoangPhuc.ipynb
 ├── data/
 │   └── gia_nha.csv
@@ -49,7 +49,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 │   ├── bai2.png
 │   └── bai3.png
 ├── outputs/
-│   ├── Baitap.txt
+│   ├── Baitaplab1.txt
 │   └── Lab1_DoHoangPhuc.txt
 ├── scripts/
 │   └── run_all.py
@@ -60,7 +60,7 @@ Notebook chứa lời giải cho 6 bài tập, bao gồm phần xử lý dữ li
 | --- | --- |
 | `code/` | Chứa 2 notebook thực hành và bài tập. Chạy các cell theo thứ tự từ trên xuống để dữ liệu và biến được khởi tạo đầy đủ. |
 | `code/Lab1_DoHoangPhuc.ipynb` | Các bước thực hành: đọc dữ liệu, tính sai số, bình phương tối thiểu, sử dụng Scikit-learn, đánh giá mô hình, Gradient Descent và hồi quy nhiều biến. |
-| `code/Baitap.ipynb` | Chứa lời giải bài tập 1–6, bao gồm mã nguồn, kết quả và phần nhận xét. |
+| `code/Baitaplab1.ipynb` | Chứa lời giải bài tập 1–6, bao gồm mã nguồn, kết quả và phần nhận xét. |
 | `data/gia_nha.csv` | Bộ dữ liệu gồm 60 căn nhà với các thuộc tính `dien_tich`, `so_phong`, `tuoi_nha` và `gia`. Cần giữ tệp này để chạy chương trình. |
 | `figures/` | Lưu các biểu đồ được tạo trong quá trình thực hành, bao gồm `bai2.png` và `bai3_tuoi_nha.png`. |
 | `outputs/` | Lưu kết quả dạng văn bản sau khi chạy các notebook bằng `run_all.py`. |
@@ -97,7 +97,7 @@ Sau đó mở:
 `Lab1_DoHoangPhuc.ipynb`
 hoặc:
 
-`Baitap.ipynb`
+`Baitaplab1.ipynb`
 và chạy từng cell từ trên xuống dưới.
 
 ### Cách 2 - Chạy toàn bộ bằng script
