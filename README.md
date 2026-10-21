@@ -29,7 +29,7 @@ Mỗi tuần học được tổ chức thành một thư mục riêng. Mỗi La
 | 01 | **Hồi quy tuyến tính**: phân tích dữ liệu giá nhà, bình phương tối thiểu, đánh giá mô hình, gradient descent và hồi quy nhiều biến. | [01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md) |
 | 02 | **Hồi quy logistic**: phân tích dữ liệu sinh viên, hàm sigmoid, khớp mô hình phân loại, ma trận nhầm lẫn, ngưỡng quyết định và mô hình hai biến. | [02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md) |
 | 03 | **Naive Bayes**: định lý Bayes, tiền xử lý văn bản với CountVectorizer, bộ lọc tin nhắn rác MultinomialNB, hiện tượng số 0 và làm trơn Laplace, GaussianNB cho biến liên tục. | [03. Naive_Bayes](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/03.%20Naive_Bayes/README.md) |
-| 04 | Lab 04 | Đang cập nhật |
+| 04 | **K láng giềng gần nhất (KNN)**: khoảng cách Euclid & Manhattan, chuẩn hóa StandardScaler & Pipeline, chọn k bằng kiểm định chéo, KNN phân loại và hồi quy. | [04. KNN](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/04.%20KNN/README.md) |
 | 05 | Lab 05 | Đang cập nhật | 
 | 06 | Lab 06 | Đang cập nhật | 
 
@@ -60,6 +60,14 @@ Machine-Learning/
 │   ├── scripts/              # run_all.py
 │   ├── requirements.txt
 │   └── README.md
+├── 04. KNN/
+│   ├── code/                 # Notebook thực hành và bài tập
+│   ├── data/                 # Dữ liệu gia_nha.csv, hai_vang_trang.csv, sinh_vien_mo_rong.csv
+│   ├── figures/              # Thư mục lưu biểu đồ
+│   ├── outputs/              # Nhật ký kết quả
+│   ├── scripts/              # run_all.py
+│   ├── requirements.txt
+│   └── README.md
 ├── .gitignore
 └── README.md
 ```
@@ -78,3 +86,4 @@ Mỗi Lab có README riêng chứa hướng dẫn cài đặt và chạy chi ti�
 - [01. Linear_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/01.%20Linear_Regression/README.md)   
 - [02. Logistic_Regression](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/02.%20Logistic_Regression/README.md)  
 - [03. Naive_Bayes](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/03.%20Naive_Bayes/README.md)  
+- [04. KNN](https://github.com/dohoangphuc2006/Machine-Learning/blob/main/04.%20KNN/README.md)  

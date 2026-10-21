@@ -1,0 +1,111 @@
+--- Cell 2 ---
+Accuracy KNN tu viet (k = 13) : 0.9200
+Accuracy Scikit-learn (k = 13) : 0.9200
+=> Ket qua giua ham tu viet va scikit-learn khop nhau hoan toan.
+
+--- GIẢI THÍCH BẢN CHẤT THUẬT TOÁN KNN ---
+1. Bản chất "Học lười" (Lazy Learning): Thuật toán không hề có quá trình tối ưu hóa tham số hay xây dựng phương trình trước. Bước "fit" chỉ đơn giản là lưu trữ toàn bộ ma trận dữ liệu huấn luyện vào bộ nhớ. Mọi tính toán đo đạc chỉ thực sự diễn ra tại thời điểm dự đoán (predict).
+2. Tính khoảng cách Euclid bằng Broadcasting: Phép toán `(X_hoc - x_moi) ** 2` tận dụng tính năng Broadcasting của NumPy để trừ vector x_moi với từng hàng của X_hoc đồng thời mà không cần vòng lặp for. Sau đó lấy `sum(axis=1)` rồi khai căn bậc hai để tạo ra mảng khoảng cách từ x_moi tới mọi điểm trong tập học.
+3. Chọn láng giềng gần nhất: Hàm `np.argsort` trả về mảng các CHỈ SỐ (index) theo thứ tự khoảng cách tăng dần. Việc lấy `[:k]` giúp trích xuất chính xác k chỉ số của k điểm gần nhất.
+4. Bỏ phiếu đa số (Majority Voting): Rút ra k nhãn tương ứng. Với k = 13 là số lẻ, trong bài toán phân loại 2 lớp, việc đếm phiếu luôn đảm bảo tìm được nhãn chiếm đa số tuyệt đối mà không bao giờ xảy ra tình trạng hòa phiếu.
+5. Lý do kết quả khớp hoàn toàn với Scikit-learn: Cả hàm tự viết và thư viện (với thiết lập mặc định) đều sử dụng cùng công thức khoảng cách Euclid và cùng quy tắc bỏ phiếu đa số trên cùng tập dữ liệu chia bởi random_state=17.
+
+
+--- Cell 4 ---
+Kiem dinh cheo 5 phan tren tap hoc (Khoang cach Manhattan):
+-> k tot nhat (Manhattan) = 27
+
+--- SO SÁNH HAI CÁCH ĐO KHOẢNG CÁCH ---
+Khoảng cách Euclid   : k = 13, Accuracy = 0.9200
+Khoảng cách Manhattan: k = 27, Accuracy = 0.9067
+
+--- NHẬN XÉT VÀ GIẢI THÍCH ---
+Nhận xét: Đổi cách đo khoảng cách từ Euclid sang Manhattan không làm kết quả (Accuracy) khác đi nhiều trên tập dữ liệu này (từ 0.9200 của Euclid sang 0.9067 của Manhattan, chỉ chênh lệch khoảng 1.33 điểm phần trăm).
+
+Giải thích:
+- Cả hai cách đo khoảng cách (đường chim bay của Euclid và đường dích dắc vuông góc của Manhattan) đều bảo toàn rất tốt thứ tự lân cận của các điểm trong không gian 2 chiều có thang đo tương đồng (đặc trưng x1 và x2).
+- Sự khác biệt nhỏ chỉ xảy ra cục bộ ở các điểm nằm sát đường biên quyết định cong (decision boundary), khiến tham số k tối ưu có sự dịch chuyển (từ k = 13 lên k = 27), nhưng độ chính xác tổng thể trên tập kiểm tra vẫn duy trì ở mức rất cao và tương đương nhau (~91% - 92%).
+
+
+--- Cell 6 ---
+Accuracy khi chua doi don vi (muc 3)     : 0.5333
+Accuracy sau khi doi sang trieu dong     : 0.8667
+
+--- GIẢI THÍCH KẾT QUẢ BÀI 3 ---
+1. Sự thay đổi của Accuracy:
+   - Sau khi đổi đơn vị cột chi_tieu sang triệu đồng (không dùng chuẩn hóa), Accuracy tăng vọt từ 0.5333 lên 0.8667.
+   - Mức 0.5333 ban đầu thậm chí còn thấp hơn cả mức đoán bừa (0.6000), trong khi mức 0.8667 đã ngang bằng với mô hình có chuẩn hóa ở mục 3.
+
+2. Vì sao chỉ đổi đơn vị mà kết quả lại khác hẳn?
+   - Thuật toán KNN tính khoảng cách dựa trên hiệu số tọa độ giữa các điểm. Ở mục 3, cột chi_tieu tính bằng nghìn đồng có độ lệch chuẩn lên tới 1692, gấp hàng trăm lần độ lệch chuẩn của gio_on (7.82) và diem_giua_ky (2.09).
+   - Khoảng cách chênh lệch hàng nghìn đơn vị của chi tiêu đã "nuốt chửng" hoàn toàn khoảng cách của hai cột học tập, biến hai cột quan trọng nhất trở nên vô hình.
+   - Khi chia cho 1000, độ lệch chuẩn của chi_tieu giảm xuống chỉ còn 1.692, trở về cùng bậc độ lớn với gio_on và diem_giua_ky. Nhờ vậy, khoảng cách Euclid phản ánh hài hòa thông tin của cả 3 đặc trưng, giúp độ chính xác tăng vọt.
+
+3. Nếu có chuẩn hoá (StandardScaler) thì đổi đơn vị có làm kết quả thay đổi không?
+   - KHÔNG. Chuẩn hóa Z-score biến đổi từng đặc trưng theo công thức x' = (x - mean) / std.
+   - Khi chia toàn bộ cột chi_tieu cho 1000 thì giá trị từng điểm x, giá trị trung bình mean và độ lệch chuẩn std đều giảm đi 1000 lần.
+   - Khi đưa vào công thức Z-score, tử số và mẫu số cùng giảm 1000 lần nên hệ số 1000 tự động bị triệt tiêu hoàn toàn:
+     [(x/1000) - (mean/1000)] / (std/1000) = (x - mean) / std.
+   - Vì vậy, dữ liệu sau khi chuẩn hóa bằng StandardScaler là hoàn toàn đồng nhất dù ban đầu đo bằng nghìn đồng hay triệu đồng, dẫn tới kết quả Accuracy sẽ không đổi.
+
+
+--- Cell 8 ---
+Accuracy tren tap hoc va tap kiem tra (weights='distance'):
+  k    tap hoc    tap kiem tra
+   1    1.0000      0.8000
+  13    1.0000      0.9333
+ 101    1.0000      0.9067
+
+
+--- NHẬN XÉT VÀ GIẢI THÍCH ---
+1. So sánh với bảng ở mục 4 (khi weights mặc định là 'uniform'):
+   - Accuracy trên tập học với weights='distance' LUÔN bằng 1.0000 ở mọi giá trị k. Lý do là vì khi mô hình tự dự đoán cho chính các điểm dữ liệu trong tập học, khoảng cách từ điểm đó tới chính nó bằng 0. Theo công thức 1/khoảng_cách, trọng số của nó sẽ tiến tới vô cực. Mẫu dữ liệu đó luôn tự quyết định nhãn đúng cho chính nó mà không cần quan tâm các láng giềng khác nói gì.
+   - Với k = 1, kết quả trên tập kiểm tra giống hệt khi không có trọng số (0.8000) vì chỉ có đúng 1 láng giềng để biểu quyết.
+
+2. Với k = 101, trọng số theo khoảng cách có giúp mô hình bớt cẩu thả không? Vì sao?
+   - CÓ, mô hình bớt cẩu thả hơn rất nhiều. Độ chính xác trên tập kiểm tra tăng vọt từ 0.8533 (của mô hình cẩu thả khi dùng uniform) lên 0.9067.
+   - Giải thích bản chất: Khi không có trọng số (ai cũng có 1 phiếu bằng nhau), lấy k = 101 (quá lớn) sẽ gom cả rất nhiều mẫu dữ liệu ở xa tít vào biểu quyết. Các mẫu ở xa thường thuộc lớp khác làm loãng phiếu, khiến đường ranh giới bị san phẳng, cắt ngang thô bạo làm mất dạng đường cong mềm mại của hai vầng trăng.
+   - Khi có weights="distance", phiếu được chia theo trọng lượng tỷ lệ nghịch với khoảng cách. Dù thu thập tới 101 hàng xóm, nhưng những hàng xóm ở xa thì lá phiếu có trọng số rất nhỏ, gần như không thể lật ngược kết quả. Lá phiếu quyết định vẫn tập trung vào nhóm một vài hàng xóm ở cự ly gần nhất. Do đó, mô hình giữ lại được sự chi tiết của đường biên quyết định, bám sát dữ liệu và "bớt cẩu thả" hơn rất nhiều.
+
+
+--- Cell 10 ---
+Kiem dinh cheo 5 phan tren tap hoc (tieu chi MAE):
+-> k tot nhat tim duoc: 2 (MAE tren tap hoc: 0.3498)
+
+MAE tren tap kiem tra (ty dong):
+ KNN, k = 2    : 0.4867
+ Duong thang    : 0.2578
+
+
+--- NHẬN XÉT VÀ TRẢ LỜI ---
+Câu hỏi: Với k tốt nhất, MAE trên tập kiểm tra có vượt được đường thẳng không?
+Trả lời: KHÔNG. Ngay cả khi đã chọn được k tối ưu nhất thông qua kiểm định chéo (k = 2), MAE của KNN trên tập kiểm tra vẫn cao hơn (tức là kém chính xác hơn) so với mô hình đường thẳng (Linear Regression): 0.4867 so với 0.2578 tỷ đồng.
+
+Giải thích:
+- Dữ liệu giá nhà có phân bố tăng gần như đường thẳng theo diện tích. Mô hình Hồi quy tuyến tính áp dụng đúng giả định này nên khớp rất hoàn hảo và tận dụng triệt để xu hướng dữ liệu.
+- Trong khi đó, KNN đoán giá bằng cách lấy trung bình cục bộ của các điểm xung quanh, nên đường dự đoán có dạng bậc thang gấp khúc thay vì đường thẳng trơn tru.
+- Điểm yếu lớn nhất của KNN trong bài toán hồi quy là không thể ngoại suy (extrapolate). Nếu căn hộ mới có diện tích lớn hơn toàn bộ tập huấn luyện, KNN chỉ có thể trả về mức giá của nhóm căn hộ lớn nhất từng thấy. Do đó, MAE của KNN sẽ luôn thua đường thẳng ở bộ dữ liệu mang tính xu hướng tuyến tính rõ ràng này.
+
+
+--- Cell 12 ---
+BANG DO THOI GIAN HUAN LUYEN VA DU DOAN
+ So_mau_huan_luyen  Thoi_gian_fit_(s)  Thoi_gian_predict_(s)
+              1000           0.001004               0.000999
+             10000           0.003000               0.002003
+            100000           0.033906               0.002000
+
+
+--- GIẢI THÍCH VÌ SAO KNN ĐƯỢC GỌI LÀ MÔ HÌNH HỌC LƯỜI (LAZY LEARNING) ---
+
+Dựa vào bảng kết quả đo thời gian phía trên, ta dễ dàng quan sát thấy 2 đặc điểm cốt lõi của KNN:
+
+1. Thời gian huấn luyện (.fit) gần như TỨC THÌ và RẤT NHỎ:
+   Dù dữ liệu huấn luyện tăng lên gấp 10 lần (từ 1,000 lên 10,000) hay gấp 100 lần (lên 100,000 mẫu), thời gian chạy lệnh .fit vẫn xấp xỉ 0 giây. Lý do là vì ở bước này, KNN hoàn toàn KHÔNG HỌC hay tính toán bất kỳ một phương trình, trọng số hay tham số nào cả. Việc huấn luyện chỉ đơn giản là thao tác "cất" toàn bộ dữ liệu vào bộ nhớ (RAM).
+
+2. Thời gian dự đoán (.predict) RẤT CHẬM và TĂNG TỶ LỆ THUẬN với quy mô dữ liệu:
+   Khi dùng 1000 mẫu mới để dự đoán, thời gian predict tăng vọt theo số lượng mẫu huấn luyện. Nguyên nhân là do tại thời điểm dự đoán, KNN bắt đầu "lôi" dữ liệu ra và tính khoảng cách Euclid từ 1000 mẫu mới này tới TOÀN BỘ các mẫu cũ trong tập huấn luyện (lần lượt là 1 nghìn, 10 nghìn, 100 nghìn phép tính x 1000 điểm mới). Dữ liệu càng phình to, nó càng tốn nhiều thời gian đo đạc khoảng cách và tìm hàng xóm.
+
+=> KẾT LUẬN: 
+Đúng với tên gọi "Mô hình học lười" (Lazy Learning), KNN trì hoãn hoàn toàn việc học tập và xử lý dữ liệu ở giai đoạn huấn luyện (làm rất nhanh, lười biếng), và đẩy toàn bộ gánh nặng tính toán phức tạp sang giai đoạn dự đoán.
+
+
