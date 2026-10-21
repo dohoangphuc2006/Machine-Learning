@@ -32,7 +32,7 @@ Notebook thực hiện các bước thực hành theo tài liệu Lab, bao gồm
 
 `code/Baitaplab3.ipynb`
 
-Notebook chứa lời giải cho 6 bài tập, bao gồm phần mã nguồn, kết quả tính toán và phần giải thích chi tiết
+Notebook chứa lời giải cho 6 bài tập, bao gồm phần mã nguồn, kết quả tính toán và phần giải thích chi tiết.
 
 ## 📁 Cấu trúc thư mục
 
