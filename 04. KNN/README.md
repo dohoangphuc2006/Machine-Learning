@@ -128,4 +128,6 @@ Nếu xuất hiện lỗi:
 `ModuleNotFoundError`
 
 hãy chạy:
-
+```text
+pip install -r requirements.txt
+```
