@@ -1,0 +1,315 @@
+--- Cell 2 ---
+=== CAY QUYET DINH CO 5 LA ===
+So la: 5
+Do sau: 3
+[Biểu đồ hiển thị trong notebook]
+Da luu hinh cay vao file: figures\cay_nam_la.png
+
+=== CAY QUYET DINH CO DO SAU TOI DA BANG 2 ===
+So la: 4
+Do sau: 2
+[Biểu đồ hiển thị trong notebook]
+Da luu hinh cay vao file: figures\cay_sau_2.png
+
+=== TRA LOI CAU HOI BAI TAP 1 ===
+Nhan du doan la ben trai thu nhat: 0
+Nhan du doan la ben trai thu hai: 0
+
+Ket luan: Co, hai la ben trai co cung ket luan.
+
+Giải thích:
+Cây vẫn chia nút vì phép chia có thể làm giảm chỉ số Gini,
+giúp dữ liệu ở các nút con thuần hơn. Hai lá có thể cùng nhãn
+dự đoán nhưng tỷ lệ các lớp trong mỗi lá vẫn khác nhau.
+
+
+=== NHẬN XÉT VÀ GIẢI THÍCH ===
+
+Cây quyết định có độ sâu tối đa bằng 2 có thể tạo ra hai lá
+bên trái mang cùng kết luận dự đoán.
+
+Giải thích:
+- Cây quyết định lựa chọn phép chia dựa trên mức giảm độ hỗn tạp
+  của dữ liệu, chứ không bắt buộc hai nhánh phải có kết luận khác nhau.
+- Hai lá có thể cùng dự đoán một lớp nhưng tỷ lệ các lớp trong
+  từng lá vẫn khác nhau.
+- Nếu phép chia giúp giảm độ hỗn tạp trung bình có trọng số,
+  cây vẫn có thể thực hiện phép chia đó.
+- Tham số max_depth=2 giới hạn độ sâu của cây, giúp mô hình
+  đơn giản và dễ quan sát hơn.
+
+
+--- Cell 4 ---
+=== DOC VA CHUAN BI DU LIEU ===
+Tong so khach: 600
+So khach tap hoc: 450
+So khach tap kiem tra: 150
+Cac cot dac trung: thu_nhap, ty_le_no, co_viec_on_dinh, so_nguoi_phu_thuoc
+
+=== KET QUA TIM CAU HOI GOC ===
+Cot duoc chon: thu_nhap
+Nguong chia: 15.05
+Gini nut goc: 0.4998
+Gini sau khi chia: 0.3777
+Muc giam Gini: 0.1221
+
+=== KIEM CHUNG VOI SCIKIT-LEARN ===
+Cot goc cua cay: thu_nhap
+Nguong goc cua cay: 15.05
+Ket qua tu tinh trung khop voi scikit-learn.
+
+=== NHẬN XÉT VÀ GIẢI THÍCH ===
+
+Kết quả:
+Câu hỏi chia tốt nhất là thu_nhap <= 15.05.
+Chỉ số Gini giảm từ 0.4998 xuống 0.3777,
+tương ứng mức giảm 0.1221.
+
+Giải thích:
+- Chỉ số Gini dùng để đo mức độ hỗn tạp của các nhãn trong một nút.
+  Gini càng nhỏ thì các nhãn trong nút càng đồng nhất.
+- Hàm tim_cau_hoi thử lần lượt từng cột đặc trưng và các ngưỡng
+  nằm giữa hai giá trị khác nhau liên tiếp của cột đó.
+- Với mỗi phép chia, chương trình tính Gini trung bình có trọng số
+  của hai nhóm, sau đó lấy Gini ban đầu trừ đi Gini sau khi chia.
+- Phép chia có mức giảm Gini lớn nhất được chọn làm câu hỏi gốc
+  vì nó giúp giảm độ hỗn tạp của dữ liệu nhiều nhất trong các
+  phép chia đã thử.
+- Theo yêu cầu của bài thực hành, kết quả mong đợi là
+  thu_nhap <= 15.05. Nếu kết quả không khớp, cần kiểm tra lại
+  tệp dữ liệu, cách chia tập học và tập kiểm tra, cũng như thuật toán.
+
+Kết luận:
+Việc tự tính mức giảm Gini giúp hiểu cách cây quyết định lựa chọn
+câu hỏi gốc, thay vì chỉ sử dụng mô hình có sẵn của scikit-learn.
+
+
+--- Cell 7 ---
+=== DOC VA CHUAN BI DU LIEU ===
+Tong so khach: 600
+So khach tap hoc: 450
+So khach tap kiem tra: 150
+
+=== THU DO SAU VOI GINI ===
+Do sau | Accuracy tap hoc | Diem kiem dinh cheo
+     1 |            0.7467 |               0.7244
+     2 |            0.7711 |               0.7378
+     3 |            0.8000 |               0.7511
+     4 |            0.8644 |               0.8089
+     5 |            0.8978 |               0.8333
+     6 |            0.9133 |               0.8156
+     7 |            0.9400 |               0.8067
+     8 |            0.9600 |               0.7733
+     9 |            0.9800 |               0.7800
+    10 |            0.9911 |               0.7822
+    11 |            0.9933 |               0.7756
+    12 |            0.9978 |               0.7778
+    13 |            1.0000 |               0.7733
+    14 |            1.0000 |               0.7733
+    15 |            1.0000 |               0.7733
+
+Ket qua tot nhat:
+Do sau tot nhat: 5
+Diem kiem dinh cheo: 0.8333
+Accuracy tap kiem tra: 0.8533
+
+=== THU DO SAU VOI ENTROPY ===
+Do sau | Accuracy tap hoc | Diem kiem dinh cheo
+     1 |            0.7467 |               0.7244
+     2 |            0.7711 |               0.7133
+     3 |            0.7733 |               0.7489
+     4 |            0.8511 |               0.8111
+     5 |            0.8956 |               0.8222
+     6 |            0.9111 |               0.8222
+     7 |            0.9378 |               0.8089
+     8 |            0.9533 |               0.7933
+     9 |            0.9778 |               0.7844
+    10 |            0.9867 |               0.7978
+    11 |            0.9933 |               0.7911
+    12 |            0.9978 |               0.7822
+    13 |            1.0000 |               0.7822
+    14 |            1.0000 |               0.7822
+    15 |            1.0000 |               0.7867
+
+Ket qua tot nhat:
+Do sau tot nhat: 5
+Diem kiem dinh cheo: 0.8222
+Accuracy tap kiem tra: 0.8467
+
+=== SO SANH GINI VA ENTROPY ===
+Do sau tot nhat voi Gini: 5
+Do sau tot nhat voi Entropy: 5
+Accuracy tap kiem tra voi Gini: 0.8533
+Accuracy tap kiem tra voi Entropy: 0.8467
+Chenh lech accuracy: 0.0067
+Chenh lech diem kiem dinh cheo: 0.0111
+
+=== NHẬN XÉT VÀ GIẢI THÍCH ===
+
+Kết quả:
+- Gini: độ sâu tốt nhất = 5,
+  điểm kiểm định chéo = 0.8333,
+  accuracy tập kiểm tra = 0.8533.
+- Entropy: độ sâu tốt nhất = 5,
+  điểm kiểm định chéo = 0.8222,
+  accuracy tập kiểm tra = 0.8467.
+
+Nhận xét:
+Việc đổi từ Gini sang Entropy không làm accuracy trên tập kiểm tra thay đổi nhiều; chênh lệch chỉ là 0.0067.
+
+Giải thích:
+Gini và Entropy đều là thước đo độ hỗn tạp của nhãn trong một nút.
+Gini dựa trên xác suất phân loại sai khi nhãn được chọn theo phân bố
+của nút, còn Entropy đo lượng thông tin chưa chắc chắn của nhãn.
+
+Khi xây dựng cây, hai thước đo có thể lựa chọn các phép chia khác
+nhau vì cách tính độ hỗn tạp khác nhau. Tuy nhiên, nếu các phép chia
+được ưu tiên tương tự nhau, cấu trúc cây và khả năng dự đoán có thể
+không khác biệt nhiều.
+
+Độ sâu tốt nhất được chọn bằng kiểm định chéo 5 phần trên tập học,
+không chọn trực tiếp theo accuracy của tập kiểm tra. Cách làm này
+giúp hạn chế việc dùng tập kiểm tra để lựa chọn mô hình.
+
+Kết luận:
+Cần dựa vào độ sâu, điểm kiểm định chéo và accuracy thực tế để đánh
+giá ảnh hưởng của việc đổi từ Gini sang Entropy, thay vì mặc định
+rằng một thước đo luôn tốt hơn thước đo còn lại.
+
+
+--- Cell 9 ---
+=== DOC VA CHUAN BI DU LIEU ===
+Tong so khach: 600
+So khach tap hoc: 450
+So khach tap kiem tra: 150
+
+=== SO SANH CAC GIA TRI MIN_SAMPLES_LEAF ===
+Gia tri | Diem kiem dinh cheo 5 phan
+      1 | 0.7733
+      2 | 0.7822
+      5 | 0.8067
+     10 | 0.8089
+     20 | 0.8089
+     40 | 0.7133
+
+=== GIA TRI CAT TIA TOT NHAT ===
+min_samples_leaf tot nhat: 10
+Diem kiem dinh cheo: 0.8089
+
+=== MO HINH CAT TIA BANG MIN_SAMPLES_LEAF ===
+Do sau cua cay: 8
+So la cua cay: 30
+Accuracy tap kiem tra: 0.8467
+
+=== MO HINH CAY SAU 5 ===
+Do sau cua cay: 5
+So la cua cay: 27
+Accuracy tap kiem tra: 0.8533
+
+=== SO SANH HAI CACH CAT TIA ===
+Accuracy min_samples_leaf: 0.8467
+Accuracy max_depth=5:      0.8533
+Chenh lech accuracy:       -0.0067
+
+=== NHẬN XÉT VÀ GIẢI THÍCH ===
+
+Kết quả:
+- Giá trị min_samples_leaf được chọn bằng kiểm định chéo:
+  10.
+- Điểm kiểm định chéo tốt nhất: 0.8089.
+- Accuracy của cây dùng min_samples_leaf trên tập kiểm tra:
+  0.8467.
+- Accuracy của cây sâu 5 trên tập kiểm tra:
+  0.8533.
+
+Nhận xét:
+Trên tập kiểm tra này, cây sâu 5 cho accuracy cao hơn cách dùng min_samples_leaf.
+
+Giải thích:
+Tham số min_samples_leaf quy định số khách tối thiểu phải có
+trong mỗi lá. Khi tăng giá trị này, cây thường có ít lá hơn và
+cấu trúc đơn giản hơn, nhờ đó có thể hạn chế việc học thuộc dữ liệu
+huấn luyện. Tuy nhiên, nếu giá trị quá lớn, cây có thể trở nên quá
+đơn giản và bỏ lỡ những quy luật quan trọng.
+
+Trong bài này, chương trình thử lần lượt các giá trị
+1, 2, 5, 10, 20 và 40. Điểm kiểm định chéo trung bình trên tập học
+được dùng để chọn giá trị tốt nhất; tập kiểm tra không được dùng
+để lựa chọn tham số. Sau đó, mô hình được huấn luyện lại trên toàn
+bộ tập học và đánh giá trên tập kiểm tra để so sánh với cây sâu 5.
+
+Kết luận:
+Trên tập kiểm tra này, cây sâu 5 cho accuracy cao hơn cách dùng min_samples_leaf.
+Cách nào tốt hơn trong lần thực nghiệm này được xác định bằng
+accuracy trên tập kiểm tra. Kết quả chỉ phản ánh bộ dữ liệu và
+cách chia đang sử dụng, không chứng minh rằng một phương pháp
+luôn tốt hơn trong mọi trường hợp.
+
+
+--- Cell 12 ---
+=== DOC VA CHUAN BI DU LIEU ===
+Tong so khach: 600
+So khach tap hoc: 450
+So khach tap kiem tra: 150
+
+=== DO QUAN TRONG THEO FEATURE_IMPORTANCES_ ===
+thu_nhap              0.4269
+ty_le_no              0.2696
+so_ngau_nhien         0.1499
+co_viec_on_dinh       0.0773
+so_nguoi_phu_thuoc    0.0764
+
+=== PERMUTATION IMPORTANCE ===
+Do quan trong trung binh tren tap kiem tra:
+thu_nhap              0.3073
+ty_le_no              0.1993
+co_viec_on_dinh       0.1117
+so_nguoi_phu_thuoc    0.0497
+so_ngau_nhien         0.0017
+
+=== SO SANH THU HANG ===
+Thu hang so_ngau_nhien theo feature_importances_: 3/5
+Thu hang so_ngau_nhien theo permutation_importance: 5/5
+
+=== BANG SO SANH HAI PHUONG PHAP ===
+                    feature_importances_  permutation_importance  do_lech_chuan_permutation
+thu_nhap                          0.4269                  0.3073                     0.0242
+ty_le_no                          0.2696                  0.1993                     0.0357
+co_viec_on_dinh                   0.0773                  0.1117                     0.0155
+so_nguoi_phu_thuoc                0.0764                  0.0497                     0.0199
+so_ngau_nhien                     0.1499                  0.0017                     0.0111
+
+Accuracy tren tap kiem tra: 0.9067
+
+--- Cell 15 ---
+=== DOC VA CHUAN BI DU LIEU ===
+Tong so can nha: 60
+So can tap hoc: 48
+So can tap kiem tra: 12
+
+=== MAE TREN TAP KIEM TRA (TY DONG) ===
+Cay hoi quy sau 3 : 0.5039
+Duong hoi quy     : 0.2578
+Rung 200 cay      : 0.4559
+
+=== DU DOAN GIA NHA (TY DONG) ===
+Dien tich | Cay sau 3 | Duong thang | Rung 200 cay
+       60 |      4.92 |        5.12 |         5.09
+      100 |      8.32 |        8.24 |         7.89
+      150 |      9.40 |       12.13 |         9.20
+      250 |      9.40 |       19.91 |         9.20
+
+=== PHAN TICH DU DOAN CAN 250 M2 ===
+Gia lon nhat trong tap hoc: 9.74 ty dong
+Du doan cua rung: 9.1973 ty dong
+Gia tri thap nhat trong 200 cay: 8.5233
+Gia tri cao nhat trong 200 cay: 9.7400
+Trung binh du doan cua 200 cay: 9.1972
+
+Mot so muc du doan pho bien cua cac cay:
+9.19    141
+9.01     38
+9.67     15
+9.74      4
+8.75      1
+
