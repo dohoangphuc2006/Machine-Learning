@@ -4,8 +4,24 @@ import argparse
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import tempfile
+
+
+def an_duong_dan_ca_nhan(noi_dung):
+    """Ẩn thư mục lab và thư mục người dùng trong thông báo lỗi."""
+    for thu_muc, thay_the in (
+        (Path(__file__).resolve().parents[1], "."),
+        (Path.home(), "<thu_muc_nguoi_dung>"),
+    ):
+        for duong_dan in sorted(
+            {str(thu_muc), thu_muc.as_posix(), str(thu_muc).replace("\\", "\\\\")},
+            key=len, reverse=True,
+        ):
+            noi_dung = re.sub(re.escape(duong_dan), lambda _: thay_the, noi_dung,
+                              flags=re.IGNORECASE if os.name == "nt" else 0)
+    return noi_dung
 
 
 def ghi_nhat_ky(notebook, duong_dan):
@@ -27,7 +43,7 @@ def ghi_nhat_ky(notebook, duong_dan):
             elif ket_qua.output_type == "error":
                 cac_doan.append(f"{ket_qua.ename}: {ket_qua.evalue}\n")
         cac_doan.append("\n")
-    duong_dan.write_text("".join(cac_doan), encoding="utf-8")
+    duong_dan.write_text(an_duong_dan_ca_nhan("".join(cac_doan)), encoding="utf-8")
 
 
 def main():
@@ -55,7 +71,7 @@ def main():
     if duong_dan_dataset is not None:
         duong_dan_dataset = duong_dan_dataset.expanduser().resolve()
         if not duong_dan_dataset.is_file():
-            print(f"Khong tim thay dataset: {duong_dan_dataset}", file=sys.stderr)
+            print(f"Khong tim thay dataset: {duong_dan_dataset.name}", file=sys.stderr)
             return 1
 
     try:
@@ -65,7 +81,7 @@ def main():
         from jupyter_client.kernelspec import KernelSpecManager
     except ImportError:
         print("Chưa đủ thư viện. Cài bằng lệnh sau rồi chạy lại:", file=sys.stderr)
-        print(f'"{sys.executable}" -m pip install -r "{thu_muc_du_an / "requirements.txt"}"', file=sys.stderr)
+        print("Tu thu muc lab, chay: python -m pip install -r requirements.txt", file=sys.stderr)
         return 1
 
     thu_muc_ket_qua.mkdir(exist_ok=True)
@@ -107,8 +123,8 @@ def main():
                 ).execute(cleanup_kc=True)
             except Exception as loi:
                 ghi_nhat_ky(notebook, nhat_ky)
-                print(f"Lỗi khi chạy {duong_dan.name}: {loi}", file=sys.stderr)
-                print(f"Xem nhật ký: {nhat_ky}", file=sys.stderr)
+                print(an_duong_dan_ca_nhan(f"Lỗi khi chạy {duong_dan.name}: {loi}"), file=sys.stderr)
+                print(f"Xem nhật ký: outputs/{nhat_ky.name}", file=sys.stderr)
                 return 1
 
             # Chỉ cập nhật notebook gốc khi toàn bộ cell đã chạy thành công.
@@ -118,7 +134,7 @@ def main():
             ghi_nhat_ky(notebook, nhat_ky)
             print(f"  Đã lưu notebook và outputs/{nhat_ky.name}", flush=True)
 
-    print(f"Hoàn tất {len(cac_notebook)} notebook. Biểu đồ nằm trong: {thu_muc_du_an / 'figures'}")
+    print(f"Hoàn tất {len(cac_notebook)} notebook. Thư mục biểu đồ: figures/")
     return 0
 
 
@@ -127,4 +143,9 @@ if __name__ == "__main__":
     for luong in (sys.stdout, sys.stderr):
         if hasattr(luong, "reconfigure"):
             luong.reconfigure(encoding="utf-8")
-    raise SystemExit(main())
+    try:
+        ma_thoat = main()
+    except Exception as loi:
+        print(an_duong_dan_ca_nhan(f"Lỗi chạy script ({type(loi).__name__}): {loi}"), file=sys.stderr)
+        ma_thoat = 1
+    raise SystemExit(ma_thoat)
