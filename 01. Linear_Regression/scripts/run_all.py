@@ -1,5 +1,6 @@
 """Chạy các notebook trong code/, lưu kết quả và nhật ký bằng một lệnh."""
 
+import argparse
 import json
 import os
 from pathlib import Path
@@ -30,6 +31,14 @@ def ghi_nhat_ky(notebook, duong_dan):
 
 
 def main():
+    phan_tich = argparse.ArgumentParser(
+        description="Chay hai notebook Lab 1, luu ket qua vao outputs va anh vao figures."
+    )
+    phan_tich.add_argument(
+        "--data", type=Path,
+        help="Duong dan gia_nha.csv, ke ca khi tep nam ngoai thu muc data.",
+    )
+    tham_so = phan_tich.parse_args()
     # Dựa vào vị trí script, không phụ thuộc nơi người dùng mở terminal.
     thu_muc_du_an = Path(__file__).resolve().parents[1]
     thu_muc_ket_qua = thu_muc_du_an / "outputs"
@@ -40,9 +49,14 @@ def main():
     if not cac_notebook:
         print("Không tìm thấy notebook trong thư mục code/.", file=sys.stderr)
         return 1
-    if not (thu_muc_du_an / "data" / "gia_nha.csv").is_file():
-        print("Thiếu data/gia_nha.csv. Hãy tải đầy đủ thư mục dự án.", file=sys.stderr)
-        return 1
+    duong_dan_dataset = tham_so.data
+    if duong_dan_dataset is None and os.environ.get("LAB1_DATA_FILE"):
+        duong_dan_dataset = Path(os.environ["LAB1_DATA_FILE"])
+    if duong_dan_dataset is not None:
+        duong_dan_dataset = duong_dan_dataset.expanduser().resolve()
+        if not duong_dan_dataset.is_file():
+            print(f"Khong tim thay dataset: {duong_dan_dataset}", file=sys.stderr)
+            return 1
 
     try:
         import nbformat
@@ -61,23 +75,23 @@ def main():
     with tempfile.TemporaryDirectory(prefix="hoi_quy_kernel_") as tam:
         thu_muc_kernel = Path(tam) / "python3"
         thu_muc_kernel.mkdir()
+        bien_moi_truong = {
+            "MPLBACKEND": "module://matplotlib_inline.backend_inline",
+            "LAB1_ROOT": str(thu_muc_du_an),
+            "LAB1_DATA_FILE": str(duong_dan_dataset) if duong_dan_dataset else "",
+        }
         cau_hinh = {
             "argv": [sys.executable, "-m", "ipykernel_launcher", "-f", "{connection_file}"],
             "display_name": "Python 3",
             "language": "python",
-            "env": {"MPLBACKEND": "module://matplotlib_inline.backend_inline"},
+            "env": bien_moi_truong,
         }
         (thu_muc_kernel / "kernel.json").write_text(json.dumps(cau_hinh), encoding="utf-8")
 
         for duong_dan in cac_notebook:
             print(f"Đang chạy: {duong_dan.name}", flush=True)
             notebook = nbformat.read(duong_dan, as_version=4)
-            # Notebook chạy từ thư mục gốc dự án, nên chuẩn hóa đường dẫn dữ liệu.
-            for cell in notebook.cells:
-                if cell.cell_type == "code":
-                    cell.source = cell.source.replace(
-                        '"../data/gia_nha.csv"', '"data/gia_nha.csv"'
-                    ).replace('"gia_nha.csv"', '"data/gia_nha.csv"')
+            # Ô chuẩn bị tự tìm dữ liệu; script không sửa mã của notebook.
             nhat_ky = thu_muc_ket_qua / f"{duong_dan.stem}.txt"
             quan_ly_kernel = KernelManager(
                 kernel_name="python3",
