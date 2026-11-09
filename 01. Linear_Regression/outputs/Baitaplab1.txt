@@ -19,7 +19,7 @@ so_phong
 2             26           3.87          5.5673          7.60
 3             22           5.13          7.4473          9.67
 4              6           7.83          8.9233          9.74
-Da luu hinh: C:\Users\Admin\OneDrive\Documents\VLU\Năm 3\HK1nam3\Học máy và ứng dụng\Lab_hocmayvaungdung\01. Linear_Regression\figures\bai2.png
+Da luu hinh: figures/bai2.png
 
 NHẬN XÉT VÀ GIẢI THÍCH:
 Trên dữ liệu gốc, các nhóm nhiều phòng có xu hướng giá cao hơn, nhưng các căn cùng số phòng vẫn có giá khác nhau. Số phòng không giải thích toàn bộ giá nhà; biểu đồ và bảng trung bình nhóm chỉ cho thấy mối liên hệ trong dataset, không chứng minh nhân quả.
@@ -28,6 +28,7 @@ Trên dữ liệu gốc, các nhóm nhiều phòng có xu hướng giá cao hơn
 He so goc w = -0.037858
 He so chan b = 6.983593
 R2 tren du lieu khop duong thang: 0.0262
+Da luu hinh: figures/bai3_tuoi_nha.png
 [Biểu đồ hiển thị trong notebook]
 
 NHẬN XÉT VÀ GIẢI THÍCH:
