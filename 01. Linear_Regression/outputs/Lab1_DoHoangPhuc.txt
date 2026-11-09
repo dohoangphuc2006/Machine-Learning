@@ -1,5 +1,5 @@
 --- Cell 3 ---
-Dataset dang su dung: C:\Users\Admin\OneDrive\Documents\VLU\Năm 3\HK1nam3\Học máy và ứng dụng\Lab_hocmayvaungdung\01. Linear_Regression\data\gia_nha.csv
+Dataset dang su dung: gia_nha.csv
 So dong du lieu: 60
 
 --- Cell 5 ---
