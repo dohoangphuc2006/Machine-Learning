@@ -109,7 +109,7 @@ Tải notebook trong `code/` lên Colab và chạy ô chuẩn bị. Nếu chưa 
 ## ⚠️ Lưu ý
 
 - Tải đầy đủ thư mục Lab 1, đặc biệt là hai notebook trong `code/` và dữ liệu gốc `data/gia_nha.csv`. Nếu đặt CSV ở nơi khác, dùng `--data` hoặc chỉ định `DUONG_DAN_DATASET` như hướng dẫn ở trên.
-- Các lệnh trong README được viết để chạy từ thư mục `01. Linear_Regression`. Khi chạy notebook trực tiếp, chạy ô chuẩn bị trước và kiểm tra đường dẫn dataset được in ra.
+- Các lệnh trong README được viết để chạy từ thư mục `01. Linear_Regression`. Khi chạy notebook trực tiếp, chạy ô chuẩn bị trước; kết quả chỉ in tên file dataset. Nếu cần kiểm tra vị trí file, xem biến `duong_dan_dataset` trong notebook.
 - Giữ nguyên dữ liệu gốc khi đối chiếu kết quả với tài liệu.
 - Giữ `test_size=0.2` và `random_state=42` ở các phần so sánh mô hình.
 - Chạy lại `scripts/run_all.py` sau khi thay đổi mã hoặc dữ liệu để cập nhật kết quả trong notebook, hai file TXT trong `outputs/` và ảnh trong `figures/`.
