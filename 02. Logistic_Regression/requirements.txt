@@ -6,3 +6,5 @@ notebook
 nbclient
 nbformat
 ipykernel
+jupyter-client
+matplotlib-inline
