@@ -1,10 +1,27 @@
 """Chạy các notebook trong code/, lưu kết quả và nhật ký bằng một lệnh."""
 
+import argparse
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import tempfile
+
+
+def an_duong_dan_ca_nhan(noi_dung):
+    """Ẩn thư mục lab và thư mục người dùng trong thông báo lỗi."""
+    for thu_muc, thay_the in (
+        (Path(__file__).resolve().parents[1], "."),
+        (Path.home(), "<thu_muc_nguoi_dung>"),
+    ):
+        for duong_dan in sorted(
+            {str(thu_muc), thu_muc.as_posix(), str(thu_muc).replace("\\", "\\\\")},
+            key=len, reverse=True,
+        ):
+            noi_dung = re.sub(re.escape(duong_dan), lambda _: thay_the, noi_dung,
+                              flags=re.IGNORECASE if os.name == "nt" else 0)
+    return noi_dung
 
 
 def ghi_nhat_ky(notebook, duong_dan):
@@ -26,17 +43,20 @@ def ghi_nhat_ky(notebook, duong_dan):
             elif ket_qua.output_type == "error":
                 cac_doan.append(f"{ket_qua.ename}: {ket_qua.evalue}\n")
         cac_doan.append("\n")
-    duong_dan.write_text("".join(cac_doan), encoding="utf-8")
+    duong_dan.write_text(an_duong_dan_ca_nhan("".join(cac_doan)), encoding="utf-8")
 
 
 def main():
-    # Nếu file runall nằm trong scripts/, parents[1] là thư mục gốc dự án.
-    # Nếu file runall nằm ngay tại thư mục gốc, đổi parents[1] thành parent.
-    if Path(__file__).resolve().parent.name == "scripts":
-        thu_muc_du_an = Path(__file__).resolve().parents[1]
-    else:
-        thu_muc_du_an = Path(__file__).resolve().parent
-
+    phan_tich = argparse.ArgumentParser(
+        description="Chay hai notebook Lab 2, luu ket qua vao outputs va anh vao figures."
+    )
+    phan_tich.add_argument(
+        "--data", type=Path,
+        help="Duong dan sinh_vien.csv, ke ca khi tep nam ngoai thu muc data.",
+    )
+    tham_so = phan_tich.parse_args()
+    # Dựa vào vị trí script, không phụ thuộc nơi người dùng mở terminal.
+    thu_muc_du_an = Path(__file__).resolve().parents[1]
     thu_muc_ket_qua = thu_muc_du_an / "outputs"
     cac_notebook = sorted(
         (thu_muc_du_an / "code").glob("*.ipynb"),
@@ -45,70 +65,56 @@ def main():
     if not cac_notebook:
         print("Không tìm thấy notebook trong thư mục code/.", file=sys.stderr)
         return 1
-
-    # Đã sửa thành kiểm tra file sinh_vien.csv
-    if not (thu_muc_du_an / "data" / "sinh_vien.csv").is_file():
-        print(
-            "Thiếu data/sinh_vien.csv. Hãy tải đầy đủ thư mục dự án.",
-            file=sys.stderr,
-        )
-        return 1
+    duong_dan_dataset = tham_so.data
+    if duong_dan_dataset is None and os.environ.get("LAB2_DATA_FILE"):
+        duong_dan_dataset = Path(os.environ["LAB2_DATA_FILE"])
+    if duong_dan_dataset is not None:
+        duong_dan_dataset = duong_dan_dataset.expanduser().resolve()
+        if not duong_dan_dataset.is_file():
+            print(f"Khong tim thay dataset: {duong_dan_dataset.name}", file=sys.stderr)
+            return 1
 
     try:
+        import nbformat
+        from nbclient import NotebookClient
         from jupyter_client import KernelManager
         from jupyter_client.kernelspec import KernelSpecManager
-        from nbclient import NotebookClient
-        import nbformat
     except ImportError:
-        print(
-            "Chưa đủ thư viện. Cài bằng lệnh sau rồi chạy lại:", file=sys.stderr
-        )
-        print(
-            f'"{sys.executable}" -m pip install nbformat nbclient ipykernel',
-            file=sys.stderr,
-        )
+        print("Chưa đủ thư viện. Cài bằng lệnh sau rồi chạy lại:", file=sys.stderr)
+        print("Tu thu muc lab, chay: python -m pip install -r requirements.txt", file=sys.stderr)
         return 1
 
     thu_muc_ket_qua.mkdir(exist_ok=True)
     (thu_muc_du_an / "figures").mkdir(exist_ok=True)
 
     # Kernel tạm dùng đúng Python đang chạy script, không đổi cấu hình Jupyter.
-    with tempfile.TemporaryDirectory(prefix="hoi_quy_kernel_") as tam:
+    with tempfile.TemporaryDirectory(prefix="logistic_kernel_") as tam:
         thu_muc_kernel = Path(tam) / "python3"
         thu_muc_kernel.mkdir()
+        bien_moi_truong = {
+            "MPLBACKEND": "module://matplotlib_inline.backend_inline",
+            "LAB2_ROOT": str(thu_muc_du_an),
+            "LAB2_DATA_FILE": str(duong_dan_dataset) if duong_dan_dataset else "",
+        }
         cau_hinh = {
-            "argv": [
-                sys.executable,
-                "-m",
-                "ipykernel_launcher",
-                "-f",
-                "{connection_file}",
-            ],
+            "argv": [sys.executable, "-m", "ipykernel_launcher", "-f", "{connection_file}"],
             "display_name": "Python 3",
             "language": "python",
-            "env": {"MPLBACKEND": "module://matplotlib_inline.backend_inline"},
+            "env": bien_moi_truong,
         }
-        (thu_muc_kernel / "kernel.json").write_text(
-            json.dumps(cau_hinh), encoding="utf-8"
-        )
+        (thu_muc_kernel / "kernel.json").write_text(json.dumps(cau_hinh), encoding="utf-8")
 
         for duong_dan in cac_notebook:
             print(f"Đang chạy: {duong_dan.name}", flush=True)
             notebook = nbformat.read(duong_dan, as_version=4)
-
-            # Chuẩn hóa lại đường dẫn đọc file sinh_vien.csv trong các cell
-            for cell in notebook.cells:
-                if cell.cell_type == "code":
-                    cell.source = cell.source.replace(
-                        '"../data/sinh_vien.csv"', '"data/sinh_vien.csv"'
-                    ).replace('"sinh_vien.csv"', '"data/sinh_vien.csv"')
-
+            # Ô chuẩn bị tự tìm dữ liệu; script không sửa mã của notebook.
             nhat_ky = thu_muc_ket_qua / f"{duong_dan.stem}.txt"
             quan_ly_kernel = KernelManager(
                 kernel_name="python3",
                 kernel_spec_manager=KernelSpecManager(kernel_dirs=[tam]),
             )
             try:
+                # Mỗi notebook có kernel riêng; dừng nếu một cell báo lỗi.
                 NotebookClient(
                     notebook,
                     km=quan_ly_kernel,
@@ -117,27 +123,29 @@ def main():
                 ).execute(cleanup_kc=True)
             except Exception as loi:
                 ghi_nhat_ky(notebook, nhat_ky)
-                print(
-                    f"Lỗi khi chạy {duong_dan.name}: {loi}",
-                    file=sys.stderr,
-                )
-                print(f"Xem nhật ký: {nhat_ky}", file=sys.stderr)
+                print(an_duong_dan_ca_nhan(f"Lỗi khi chạy {duong_dan.name}: {loi}"), file=sys.stderr)
+                print(f"Xem nhật ký: outputs/{nhat_ky.name}", file=sys.stderr)
                 return 1
 
+            # Chỉ cập nhật notebook gốc khi toàn bộ cell đã chạy thành công.
             ban_tam = duong_dan.with_suffix(".ipynb.tmp")
             nbformat.write(notebook, ban_tam)
             os.replace(ban_tam, duong_dan)
             ghi_nhat_ky(notebook, nhat_ky)
             print(f"  Đã lưu notebook và outputs/{nhat_ky.name}", flush=True)
 
-    print(
-        f"\nHoàn tất {len(cac_notebook)} notebook. Biểu đồ nằm trong: {thu_muc_du_an / 'figures'}"
-    )
+    print(f"Hoàn tất {len(cac_notebook)} notebook. Thư mục biểu đồ: figures/")
     return 0
 
 
 if __name__ == "__main__":
+    # Hiển thị tiếng Việt trên terminal Windows, kể cả khi chuyển hướng stdout.
     for luong in (sys.stdout, sys.stderr):
         if hasattr(luong, "reconfigure"):
             luong.reconfigure(encoding="utf-8")
-    raise SystemExit(main())
+    try:
+        ma_thoat = main()
+    except Exception as loi:
+        print(an_duong_dan_ca_nhan(f"Lỗi chạy script ({type(loi).__name__}): {loi}"), file=sys.stderr)
+        ma_thoat = 1
+    raise SystemExit(ma_thoat)
