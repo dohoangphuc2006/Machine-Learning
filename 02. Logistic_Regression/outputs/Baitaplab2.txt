@@ -1,78 +1,97 @@
---- Cell 2 ---
-So sinh vien co diem giua ky >= 7.0: 31
-Ty le qua mon cua nhom diem >= 7.0 : 0.9032
-Ty le qua mon cua nhom diem < 7.0  : 0.4831
-
-Nhan xet:
-Diem giua ky phan biet rat tot hai nhom vi ty le qua mon cua nhom
-diem cao (>= 7.0) vuot troi hon han so voi nhom con lai.
+--- Cell 3 ---
+Dataset dang su dung: sinh_vien.csv
+So dong du lieu: 120
 
 --- Cell 5 ---
+So sinh vien diem giua ky >= 7: 31
+Ty le qua mon nhom diem >= 7: 0.9032
+Ty le qua mon nhom diem < 7 : 0.4831
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Nhóm điểm từ 7 trở lên có tỷ lệ qua môn 90.32%, nhóm còn lại là 48.31%; chênh lệch 42.01 điểm phần trăm.
+Với dữ liệu gốc, điểm giữa kỳ phân biệt được hai nhóm về tỷ lệ qua môn. Điều này gợi ý biến có thể hữu ích cho dự đoán, nhưng chưa chứng minh quan hệ nhân quả hoặc bảo đảm mọi mô hình sẽ dự đoán tốt.
+
+--- Cell 7 ---
 [Biểu đồ hiển thị trong notebook]
-Đã vẽ và lưu biểu đồ vào tệp sigmoid.png thành công.
+Da luu hinh: figures/sigmoid.png
+sigmoid(0) = 0.5000
 
---- Cell 8 ---
-Ket qua du doan cho cac moc gio on:
-Gio on:  3.00 -> z =  -3.89 | Xac suat qua = 0.0201 | Nhan = 0
-Gio on:  8.00 -> z =  -1.92 | Xac suat qua = 0.1276 | Nhan = 0
-Gio on: 12.89 -> z =  -0.00 | Xac suat qua = 0.4996 | Nhan = 0
-Gio on: 18.00 -> z =   2.01 | Xac suat qua = 0.8814 | Nhan = 1
-Gio on: 26.00 -> z =   5.15 | Xac suat qua = 0.9942 | Nhan = 1
+NHẬN XÉT VÀ GIẢI THÍCH:
+Đồ thị có dạng chữ S, tăng theo z và đi qua điểm (0; 0.5). Khi z rất âm, giá trị tiến gần 0; khi z rất dương, giá trị tiến gần 1. Đường ngang và đường dọc đánh dấu ngưỡng xác suất 0.5 tương ứng z = 0.
+Trong hồi quy logistic nhị phân, sigmoid biến điểm tuyến tính thành xác suất mô hình gán cho lớp 1; xác suất này không đồng nghĩa dự đoán chắc chắn đúng.
 
-Giai thich:
-Voi gio_on = 12.89, gia tri z = w * 12.89 + b xap xi bang 0.
-Vi sigmoid(0) = 1/(1 + e^0) = 1/2 = 0.5 nen xac suat ra gan dung 0.5.
+--- Cell 9 ---
+He so goc w=0.392819, he so chan b=-5.064890
+Gio on= 3.00, z=-3.886432, xac suat qua=0.020106, nhan=0
+Gio on= 8.00, z=-1.922336, xac suat qua=0.127601, nhan=0
+Gio on=12.89, z=-0.001451, xac suat qua=0.499637, nhan=0
+Gio on=18.00, z= 2.005855, xac suat qua=0.881410, nhan=1
+Gio on=26.00, z= 5.148409, xac suat qua=0.994225, nhan=1
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Tại 12.89 giờ, z = -0.001451, gần 0 nên sigmoid(z) gần 0.5.
+Mốc xác suất đúng 0.5 theo hệ số đang học là −b/w = 12.893693 giờ. Mốc 12.89 chỉ là giá trị làm tròn.
+Vì vậy xác suất tại 12.89 không bắt buộc bằng đúng 0.5. Nhãn được quyết định từ xác suất chưa làm tròn: từ 0.5 trở lên là lớp 1, thấp hơn là lớp 0. Đây là xác suất theo mô hình, không phải kết luận chắc chắn sinh viên sẽ qua hay rớt.
 
 --- Cell 11 ---
-TP = 17, TN = 9, FP = 3, FN = 1
-
-Ket qua tu tinh bang cong thuc:
+TN=9, FP=3, FN=1, TP=17
 Accuracy  = 0.8667
 Precision = 0.8500
 Recall    = 0.9444
-F1-score  = 0.8947
+F1        = 0.8947
+Moc doi chieu trong tai lieu: 0.8667, 0.8500, 0.9444, 0.8947
 
---- Cell 14 ---
-Bảng dò tìm ngưỡng theo F1-score:
- Ngưỡng       F1-score
-  0.05         0.7826
-  0.10         0.8182
-  0.15         0.8182
-  0.20         0.8571
-  0.25         0.9000
-  0.30         0.8947
-  0.35         0.8947
-  0.40         0.8947
-  0.45         0.8947
-  0.50         0.8947
-  0.55         0.8889
-  0.60         0.9412
-  0.65         0.9412
-  0.70         0.9091
-  0.75         0.8750
-  0.80         0.8387
-  0.85         0.8000
-  0.90         0.5600
-  0.95         0.4348
+NHẬN XÉT VÀ GIẢI THÍCH:
+Lớp dương ở đây là qua môn (1), lớp âm là rớt môn (0).
+TP=17: thật sự qua và đoán qua; TN=9: thật sự rớt và đoán rớt. FP=3: thật sự rớt nhưng đoán qua; FN=1: thật sự qua nhưng đoán rớt.
+Accuracy = (TP+TN)/N = (17+9)/30 = 0.8667, là tỷ lệ đúng trên toàn bộ tập kiểm tra.
+Precision = TP/(TP+FP) = 17/(17+3) = 0.8500: trong các bạn được đoán qua, tỷ lệ thật sự qua.
+Recall = TP/(TP+FN) = 17/(17+1) = 0.9444: trong các bạn thật sự qua, tỷ lệ được nhận diện đúng.
+F1 = 2×Precision×Recall/(Precision+Recall) = 0.8947. Trung bình điều hòa này thấp khi một trong hai chỉ số thấp, không xét trực tiếp số TN.
+Bốn chỉ số đều tự tính từ bốn ô, không gọi các hàm tính điểm của thư viện. Mốc tài liệu được in riêng để đối chiếu; cần phân biệt mẫu số của precision là nhóm được đoán qua, còn của recall là nhóm thật sự qua. Khi mẫu số bằng 0, mã quy ước điểm tương ứng bằng 0 để tránh chia cho 0.
 
-Ngưỡng cho F1 cao nhất là: 0.60 với F1 = 0.9412
-(So với ngưỡng mặc định 0.5: F1 = 0.8947)
+--- Cell 13 ---
+ nguong     F1
+ 0.0500 0.7826
+ 0.1000 0.8182
+ 0.1500 0.8182
+ 0.2000 0.8571
+ 0.2500 0.9000
+ 0.3000 0.8947
+ 0.3500 0.8947
+ 0.4000 0.8947
+ 0.4500 0.8947
+ 0.5000 0.8947
+ 0.5500 0.8889
+ 0.6000 0.9412
+ 0.6500 0.9412
+ 0.7000 0.9091
+ 0.7500 0.8750
+ 0.8000 0.8387
+ 0.8500 0.8000
+ 0.9000 0.5600
+ 0.9500 0.4348
+Cac nguong cung dat F1 cao nhat: 0.60, 0.65
+Chon nguong=0.60, F1=0.9412
+F1 tai nguong 0.5=0.8947
+Tai nguong da chon: precision=1.0000, recall=0.8889
 
-Nhận xét:
-- Ngưỡng tốt nhất theo F1 KHÔNG bằng 0.5, mà đạt tại ngưỡng 0.60 với F1 = 0.9412 (vượt trội hơn mức 0.8947 tại ngưỡng 0.5).
-- Nguyên nhân: Ngưỡng 0.5 chỉ là mốc phân đôi xác suất thông thường. Trên tập dữ liệu này, việc nâng ngưỡng lên 0.60
-  giúp loại bỏ hoàn toàn các ca báo nhầm (Precision đạt 1.0000) mà vẫn giữ được độ bao phủ cao (Recall = 0.8889),
-  nhờ đó chỉ số F1 đạt mức tối ưu nhất.
+NHẬN XÉT VÀ GIẢI THÍCH:
+Các ngưỡng có F1 cao nhất trong bảng là 0.60, 0.65. Khi hòa, chọn ngưỡng nhỏ nhất là 0.60.
+Ngưỡng được chọn khác 0.5. F1 là 0.9412, so với 0.8947 tại ngưỡng mặc định.
+Precision và recall tại ngưỡng đã chọn lần lượt là 1.0000 và 0.8889. F1 phụ thuộc sự đánh đổi giữa hai chỉ số, nên 0.5 không mặc nhiên tối ưu. Khi tăng ngưỡng, số dự đoán dương giảm hoặc giữ nguyên; recall không tăng nhưng precision không nhất thiết tăng đều.
+Theo yêu cầu bài tập, bảng này dò và tính F1 trên tập kiểm tra. Vì đã dùng nhãn kiểm tra để chọn ngưỡng, F1 cao nhất trong bảng không phải ước lượng độc lập cho dữ liệu mới. Trong thực tế nên chọn ngưỡng trên tập thẩm định hoặc qua kiểm định chéo, sau đó đánh giá một lần trên tập kiểm tra chưa dùng.
 
---- Cell 17 ---
-So sanh hai lop duong:
-Lop 1 (Qua mon) : Precision = 0.8500, Recall = 0.9444
-Lop 0 (Rot mon) : Precision = 0.9000, Recall = 0.7500
+--- Cell 15 ---
+Lop duong=1: precision=0.8500, recall=0.9444
+Lop duong=0: precision=0.9000, recall=0.7500
+Ma tran theo lop 1: TN=9, FP=3, FN=1, TP=17
 
-Giai thich:
-Hai bo so khac nhau vi khi doi lop duong sang lop 0:
-- 'Duong tinh' (Positive) bay gio la doan ROT MON.
-- Precision cua lop 0 = TN / (TN + FN): trong cac ban du doan rot, bao nhieu ban rot that.
-- Recall cua lop 0 = TN / (TN + FP): trong tong so ban that su rot, mo hinh bat duoc bao nhieu ban.
-Mau so va goc nhin ve loi FP/FN da hoan doi cho nhau giua hai lop.
+NHẬN XÉT VÀ GIẢI THÍCH:
+Giữ nguyên mô hình, dữ liệu và dự đoán. Chỉ đổi lớp được xem là dương tính khi tính điểm; không đảo nhãn trong dữ liệu và không huấn luyện lại theo lớp 0.
+Với lớp 1 (qua): precision = TP/(TP+FP) = 17/(17+3) = 0.8500; recall = TP/(TP+FN) = 17/(17+1) = 0.9444.
+Khi chọn lớp 0 là dương, dùng các tên ô của ma trận lớp 1 làm mốc: TP mới = TN cũ, FP mới = FN cũ, FN mới = FP cũ, TN mới = TP cũ.
+Với lớp 0 (rớt): precision = TN/(TN+FN) = 9/(9+1) = 0.9000; recall = TN/(TN+FP) = 9/(9+3) = 0.7500.
+Precision lớp 0 xét 10 bạn được đoán rớt: có 9 bạn thật sự rớt. Recall lớp 0 xét 12 bạn thật sự rớt: nhận ra 9 và bỏ sót 3 bạn.
+Hai bộ số khác nhau vì nhóm được xem xét và loại lỗi ở mẫu số thay đổi, không phải mô hình đột nhiên dự đoán khác. Accuracy vẫn giữ nguyên vì tổng số dự đoán đúng không đổi. Khi báo cáo precision/recall phải ghi rõ lớp dương; nếu mục tiêu là hỗ trợ sinh viên có nguy cơ rớt, recall lớp 0 cho biết tỷ lệ sinh viên thực sự rớt được nhận diện.
 

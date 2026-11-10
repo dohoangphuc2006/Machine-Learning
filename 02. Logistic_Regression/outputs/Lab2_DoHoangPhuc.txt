@@ -1,4 +1,8 @@
---- Cell 2 ---
+--- Cell 3 ---
+Dataset dang su dung: sinh_vien.csv
+So dong du lieu: 120
+
+--- Cell 5 ---
 Kich thuoc bang (so dong, so cot): (120, 3)
 
 Nam dong dau tien:
@@ -23,7 +27,7 @@ qua_mon
 1    19.89
 Name: gio_on, dtype: float64
 
---- Cell 4 ---
+--- Cell 7 ---
 Bang gia tri cua ham sigmoid
   z       sigmoid(z)
  -6        0.0025
@@ -50,7 +54,7 @@ Mo hinh gia dinh: w=0.4, b=-5.0
     20.0          3.00            0.9526
     25.0          5.00            0.9933
 
---- Cell 6 ---
+--- Cell 9 ---
 He so goc w = 0.392819
 He so chan b = -5.064890
 
@@ -64,7 +68,7 @@ Du doan cho nam ban moi:
     20.0          0.9422               1
     28.0          0.9974               1
 
---- Cell 8 ---
+--- Cell 11 ---
 So sinh vien de hoc     : 90
 So sinh vien de kiem tra: 30
 
@@ -84,7 +88,7 @@ Tu tinh lai bang cong thuc:
   Precision = 17 / (17 + 3) = 0.8500
   Recall    = 17 / (17 + 1) = 0.9444
 
---- Cell 10 ---
+--- Cell 13 ---
 Nguong   So ban bi doan la qua    Precision    Recall
   0.2               24             0.7500      1.0000
   0.3               20             0.8500      0.9444
@@ -96,9 +100,9 @@ Nguong   So ban bi doan la qua    Precision    Recall
 
 Doc bang tren tu duoi len:
   Nguong cang cao thi mo hinh cang kho tinh,
-  precision tang nhung recall giam. Nguong thap thi nguoc lai.
+  recall khong tang; precision co the tang hoac giam tuy du lieu.
 
---- Cell 12 ---
+--- Cell 15 ---
 Mot bien: accuracy tren tap kiem tra = 0.8667
 Hai bien: accuracy tren tap kiem tra = 0.9000
 
