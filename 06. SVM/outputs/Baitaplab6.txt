@@ -1,0 +1,165 @@
+--- Cell 3 ---
+Dataset: sinh_vien.csv (120, 3)
+Dataset: sinh_vien_mo_rong.csv (120, 4)
+Dataset: hai_vang_trang.csv (300, 3)
+
+--- Cell 5 ---
+He so in o muc 2: w1=-0.831, w2=-0.355, b=4.820
+Do rong le theo he so in: 2.213243
+Nua do rong le theo he so day du: 1.106282
+
+Diem         f(x) tinh tay   Khoang cach (he so in)
+(3.0, 3.0)    +1.262000 1.396556
+(5.0, 4.5)    -0.932500 1.031924
+
+Ba vecto ho tro: dung toa do day du cua du lieu
+Chi so   Lop     f(x) he so in   d he so in   d he so day du
+    18     0 -0.999161 1.105692 1.106396
+    10     1 +1.000036 1.106662 1.106169
+    13     1 +1.000815 1.107523 1.106509
+Sai lech lon nhat so voi nua le (he so day du): 0.00022677
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Với hệ số đã in, f(3, 3) dương nên điểm ở phía lớp 1; f(5, 4.5) âm nên ở phía lớp 0. Độ lớn của f(x) chưa phải khoảng cách Euclid và cũng không phải xác suất; phải chia cho độ dài vectơ w.
+Đường ranh giới là w·x+b=0; hai mép lề có w·x+b=+1 và -1. Khoảng cách từ mỗi mép tới ranh giới bằng 1/||w||, nên toàn bộ lề rộng 2/||w||.
+Ba vectơ hỗ trợ của bộ 24 điểm tách được nằm gần hai mép lề, nên khoảng cách của chúng xấp xỉ 1.106282, tức một nửa độ rộng lề. Sai lệch số đo lớn nhất là 0.00022677.
+Không nên ép kết quả số thực bằng nhau tuyệt đối: hệ số in trong PDF đã làm tròn, tọa độ in cũng đã làm tròn, và bộ giải SVM có dung sai. Bảng phụ dùng hệ số đầy đủ để phân biệt các nguồn sai số.
+Kết luận nằm trên mép lề áp dụng cho ví dụ tách được này. Với lề mềm, vectơ hỗ trợ còn có thể nằm trong lề hoặc bị phân loại sai, nên không phải mọi vectơ hỗ trợ luôn cách ranh giới đúng nửa lề.
+
+--- Cell 7 ---
+Goc: w1=-0.831357, w2=-0.354868, b=4.820361
+
+Them diem (-1.0, -1.0), lop 1
+w1=-0.831357, w2=-0.354868, b=4.820361
+f(x) theo duong cu = +6.006586
+Diem moi la vecto ho tro: khong
+So vecto ho tro: 3
+Sai khac he so duong da chuan hoa: 0.000000
+Ranh gioi thay doi (dung sai 0.005): gan nhu khong
+
+Them diem (4.5, 4.0), lop 1
+w1=-2.603014, w2=-0.806843, b=15.940939
+f(x) theo duong cu = -0.340220
+Diem moi la vecto ho tro: co
+So vecto ho tro: 2
+Sai khac he so duong da chuan hoa: 0.516791
+Ranh gioi thay doi (dung sai 0.005): co
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Điểm (-1.0, -1.0) có nhãn 1 và f(x) theo đường cũ bằng 6.0066. Sau học lại, điểm này không là vectơ hỗ trợ; ranh giới gần như giữ nguyên theo dung sai đã nêu.
+Điểm (4.5, 4.0) có nhãn 1 và f(x) theo đường cũ bằng -0.3402. Sau học lại, điểm này là vectơ hỗ trợ; ranh giới thay đổi rõ theo dung sai đã nêu.
+Điểm (-1, -1) nằm xa về phía lớp 1 và thỏa f(x)>1, nên đã ở ngoài lề đúng phía. Ràng buộc mới không buộc đường tối ưu cũ phải dịch chuyển; điểm đó không có trọng số hỗ trợ khác 0.
+Điểm (4.5, 4) gần đường cũ và có f(x)<1. Với nhãn 1, nó vi phạm yêu cầu nằm ngoài mép +1; SVM phải cân bằng lại độ rộng lề và mức phạt C=1000, nên tập vectơ hỗ trợ và đường ranh giới đổi.
+Vectơ hỗ trợ là các điểm có hệ số đối ngẫu khác 0, đóng góp vào w. Thêm điểm không tự động làm đổi ranh giới: vị trí và nhãn so với lề mới là yếu tố quyết định. C lớn là phạt nặng vi phạm, không phải bảo đảm toán học rằng mọi bộ dữ liệu đều tách được. Sai khác rất nhỏ giữa hai lần tối ưu có thể do dung sai bộ giải.
+
+--- Cell 9 ---
+ bac  C_tot_nhat  diem_CV  accuracy_kiem_tra
+   2           1   0.5422             0.5067
+   3           1   0.8178             0.8267
+   4         100   0.5156             0.4800
+Cac bac dong diem CV cao nhat: [3]
+Bac duoc chon (lay bac nho nhat khi hoa): 3
+RBF muc 5, tham so: {'C': 10, 'gamma': 1}
+RBF: CV=0.8711, accuracy kiem tra=0.9200
+Chenh lech accuracy poly - RBF: -0.0933
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Theo điểm CV trên tập học, chọn bậc 3; các bậc cùng điểm cao nhất là [3]. Quy ước hòa điểm là lấy bậc nhỏ nhất. Trong từng bậc, GridSearchCV chọn C đứng trước nếu điểm bằng nhau.
+Kernel đa thức đã chọn có accuracy 0.8267, RBF mục 5 là 0.9200. Trong lần thử này, đa thức không vượt RBF trên tập kiểm tra.
+Chuẩn hóa nằm trong pipeline nên được học riêng ở mỗi fold, tránh dùng thông tin của phần thẩm định. Bậc cao hơn không bảo đảm tốt hơn: C và bậc cùng chi phối độ phức tạp. RBF đối chiếu được chạy đúng cách chưa chuẩn hóa ở mục 5; đây là so hai quy trình theo đề, không tách riêng tác động của kernel.
+Chọn bậc và C bằng CV trên tập học; các accuracy kiểm tra chỉ dùng báo cáo, không dùng để đổi lựa chọn. CV tốt nhất sau dò cũng có thể lạc quan vì đã thử nhiều ứng viên; một lần chia dữ liệu không chứng minh mô hình nào luôn tốt hơn.
+
+--- Cell 11 ---
+LUOI THUA - DIEM CV
+gamma   0.01    0.10    1.00    10.00
+C                                    
+0.1    0.6578  0.8044  0.8444  0.8578
+1.0    0.8044  0.8178  0.8667  0.8667
+10.0   0.8178  0.8400  0.8711  0.8311
+100.0  0.8178  0.8533  0.8711  0.7467
+Cac cap dong diem CV cao nhat: [{'C': 10.0, 'gamma': 1.0}, {'C': 100.0, 'gamma': 1.0}]
+Cap duoc chon: {'C': 10, 'gamma': 1}
+
+LUOI MIN - DIEM CV
+gamma     0.3     1.0     3.0
+C                            
+3      0.8533  0.8711  0.8667
+10     0.8489  0.8711  0.8667
+30     0.8622  0.8756  0.8533
+Cac cap dong diem CV cao nhat: [{'C': 30, 'gamma': 1.0}]
+Cap duoc chon: {'C': 30, 'gamma': 1}
+
+CV luoi thua: 0.871111; CV luoi min: 0.875556
+Accuracy kiem tra: luoi thua=0.9200, luoi min=0.9200
+Chenh lech CV so voi moc in 0.8711: +0.004456
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Lưới mịn cải thiện điểm CV so với lưới thưa chạy lại; chênh lệch thật là +0.004444. Mốc 0.8711 trong PDF đã làm tròn, nên một chênh lệch vài phần triệu so với mốc in không được xem là cải thiện.
+Accuracy kiểm tra không đổi từ 0.9200 thành 0.9200.
+Cặp (10, 1) của lưới thưa cũng nằm trong lưới mịn; với cùng các fold, lưới mịn ít nhất có ứng viên đó để đối chiếu. Thêm ứng viên có thể tìm được điểm tốt hơn nhưng tốn thêm 9×5 lần học và một lần refit. Dò quá kỹ có thể chỉ tận dụng dao động của các fold, không bảo đảm tăng khả năng tổng quát.
+Hai lần dò chỉ dùng tập học, không dùng nhãn kiểm tra để chọn C và gamma. Khi hòa điểm, GridSearchCV chọn cặp đầu tiên theo thứ tự lưới; không dùng accuracy kiểm tra để phá hòa.
+
+--- Cell 13 ---
+MA TRAN NHAM LAN: HANG LA NHAN THAT, COT LA NHAN DOAN
+doan   0   1   2   3   4   5   6   7   8   9
+that                                        
+0     45   0   0   0   0   0   0   0   0   0
+1      0  46   0   0   0   0   0   0   0   0
+2      0   0  44   0   0   0   0   0   0   0
+3      0   0   0  46   0   0   0   0   0   0
+4      0   0   0   0  44   0   0   0   1   0
+5      0   0   0   0   0  46   0   0   0   0
+6      0   0   0   0   0   0  45   0   0   0
+7      0   0   0   0   0   0   0  44   0   1
+8      0   1   0   0   0   0   0   0  42   0
+9      0   0   0   1   0   0   0   0   0  44
+Accuracy: 0.9911
+So anh sai: 4 / 450
+Cac cap bi nham (that -> doan):
+ 4 -> 8: 1 anh
+ 7 -> 9: 1 anh
+ 8 -> 1: 1 anh
+ 9 -> 3: 1 anh
+Da luu hinh: figures/bai5_anh_006_that_9_doan_3.png
+[Bieu do hien thi trong notebook]
+Da luu hinh: figures/bai5_anh_018_that_8_doan_1.png
+[Bieu do hien thi trong notebook]
+Da luu hinh: figures/bai5_anh_161_that_4_doan_8.png
+[Bieu do hien thi trong notebook]
+Da luu hinh: figures/bai5_anh_428_that_7_doan_9.png
+[Bieu do hien thi trong notebook]
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+SVM nhầm 4 trên 450 ảnh. Đường chéo là dự đoán đúng; ô hàng i, cột j ngoài đường chéo là chữ i bị đoán thành j, không được đọc ngược.
+Cặp 4 → 8 có 1 ảnh: các nét nối khép gần nhau có thể tạo hình giống hai vòng của chữ 8. Đây là giả thuyết hình dạng cần đối chiếu với ảnh vừa hiển thị, không phải nguyên nhân đã được mô hình chứng minh.
+Cặp 7 → 9 có 1 ảnh: nét ngang hoặc nét móc có thể làm phần trên giống vòng của chữ 9. Đây là giả thuyết hình dạng cần đối chiếu với ảnh vừa hiển thị, không phải nguyên nhân đã được mô hình chứng minh.
+Cặp 8 → 1 có 1 ảnh: hai vòng hẹp hoặc không rõ có thể làm nét giữa trội lên giống chữ 1. Đây là giả thuyết hình dạng cần đối chiếu với ảnh vừa hiển thị, không phải nguyên nhân đã được mô hình chứng minh.
+Cặp 9 → 3 có 1 ảnh: nét đóng vòng hoặc nét trái mờ có thể khiến phần bên phải giống chữ 3. Đây là giả thuyết hình dạng cần đối chiếu với ảnh vừa hiển thị, không phải nguyên nhân đã được mô hình chứng minh.
+Ảnh chỉ có 8×8 ô; SVM RBF so sự giống nhau trong 64 giá trị pixel, không hiểu quy tắc viết chữ. Các biến thể nét viết có thể nằm gần ảnh của lớp khác. Một lỗi của một cặp trong 450 ảnh chưa đủ kết luận đó là cặp luôn hay nhầm; cần thêm dữ liệu để đánh giá mức phổ biến.
+
+--- Cell 15 ---
+Dang do n=2000 ...
+Dang do n=5000 ...
+Dang do n=10000 ...
+Dang do n=20000 ...
+
+THOI GIAN FIT: TRUNG VI 3 LAN, DON VI GIAY
+ so_mau  SVC_giay  SVC_lan_chua_hoi_tu  LinearSVC_giay  LinearSVC_lan_chua_hoi_tu
+   2000  0.020158                    0        0.001273                          0
+   5000  0.100033                    0        0.003284                          0
+  10000  1.182031                    0        0.005076                          0
+  20000  3.090651                    0        0.011517                          0
+
+TY LE THOI GIAN SO VOI CO MAU TRUOC
+2000 -> 5000 (x2.5 mau): SVC x4.96, LinearSVC x2.58
+5000 -> 10000 (x2.0 mau): SVC x11.82, LinearSVC x1.55
+10000 -> 20000 (x2.0 mau): SVC x2.61, LinearSVC x2.27
+
+NHẬN XÉT VÀ GIẢI THÍCH:
+Khi tăng từ 5000 lên 10000 mẫu (gấp đôi), thời gian SVC gấp 11.82 lần và LinearSVC gấp 1.55 lần.
+Khi tăng từ 10000 lên 20000 mẫu (gấp đôi), thời gian SVC gấp 2.61 lần và LinearSVC gấp 2.27 lần.
+Bước 2.000 lên 5.000 là tăng 2,5 lần, không phải gấp đôi. Số liệu chỉ tính thời gian fit; không cộng thời gian sinh dữ liệu, tạo mô hình hay in bảng. Mỗi lần đo tạo mô hình mới và lấy trung vị ba lần.
+SVC mặc định dùng kernel RBF và xử lý quan hệ giữa các mẫu, thường tăng chi phí nhanh hơn khi n lớn. LinearSVC giải bài toán tuyến tính với 20 đặc trưng, thường phù hợp dữ liệu lớn hơn. Đây là hai mô hình và bộ giải khác nhau; nhanh hơn không đồng nghĩa accuracy tốt hơn.
+Các bộ dữ liệu được sinh lại cho từng n, không phải các tập con lồng nhau. Độ khó bài toán, phiên bản thư viện, phần cứng và tiến trình nền đều ảnh hưởng thời gian. Không suy ra một quy luật tăng chính xác chỉ từ bốn phép đo.
+Có 0 lượt fit báo chưa hội tụ. Các lượt đo không phát sinh cảnh báo chưa hội tụ.
+
