@@ -1,0 +1,10 @@
+numpy
+pandas
+matplotlib
+scikit-learn<1.11
+notebook
+nbclient
+nbformat
+ipykernel
+jupyter-client
+matplotlib-inline
