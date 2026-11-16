@@ -1,0 +1,134 @@
+--- Cell 3 ---
+Dataset dang su dung: sinh_vien_bo_hoc.csv
+Dataset dang su dung: gia_nha.csv
+
+--- Cell 5 ---
+
+Logistic: TP=17, FP=3, FN=13, TN=267, tong=300
+Thuoc do      Tu tinh  Thu vien  Kiem tra
+accuracy    0.9467   0.9467    Khop
+precision   0.8500   0.8500    Khop
+recall      0.5667   0.5667    Khop
+f1          0.6800   0.6800    Khop
+
+Mo hinh luoi: TP=0, FP=0, FN=30, TN=270, tong=300
+Thuoc do      Tu tinh  Thu vien  Kiem tra
+accuracy    0.9000   0.9000    Khop
+precision   0.0000   0.0000    Khop
+recall      0.0000   0.0000    Khop
+f1          0.0000   0.0000    Khop
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Lớp dương 1 là bỏ học. TP là báo bỏ học đúng; FP là báo nhầm người học tiếp; FN là bỏ sót người bỏ học; TN là nhận đúng người học tiếp. Trong ma trận thư viện, hàng là nhãn thật, cột là nhãn dự đoán, thứ tự trải phẳng là TN, FP, FN, TP.
+Accuracy = (TP + TN)/N; precision = TP/(TP + FP) cho biết bao nhiêu lời báo là đúng; recall = TP/(TP + FN) cho biết tìm được bao nhiêu người bỏ học thật. F1 = 2TP/(2TP + FP + FN), tương đương trung bình điều hòa của precision và recall.
+Logistic tìm được 17/30 người bỏ học, báo nhầm 3 người và bỏ sót 13 người. Accuracy 0.9467 vì vậy cần được đọc cùng recall 0.5667.
+Mô hình lười đạt accuracy 0.9000, nhưng tìm được 0 người bỏ học. Khi không dự đoán ai là lớp 1, TP + FP = 0 nên precision không xác định về mặt toán học. Hàm quy ước trả 0, khớp zero_division=0; điều này không có nghĩa phép chia 0/0 bằng 0.
+Hàm cũng trả recall = 0 nếu không có nhãn thật lớp 1, và F1 = 0 nếu mẫu số F1 bằng 0. Mảng rỗng bị từ chối vì không có mẫu để đánh giá. Quy ước được nêu rõ để tránh lỗi chia cho 0.
+
+--- Cell 7 ---
+Bao cao cho 10 chu so:
+              precision    recall  f1-score   support
+
+           0     1.0000    1.0000    1.0000        45
+           1     0.9787    1.0000    0.9892        46
+           2     1.0000    1.0000    1.0000        44
+           3     0.9787    1.0000    0.9892        46
+           4     1.0000    0.9778    0.9888        45
+           5     1.0000    1.0000    1.0000        46
+           6     1.0000    1.0000    1.0000        45
+           7     1.0000    0.9778    0.9888        45
+           8     0.9767    0.9767    0.9767        43
+           9     0.9778    0.9778    0.9778        45
+
+    accuracy                         0.9911       450
+   macro avg     0.9912    0.9910    0.9911       450
+weighted avg     0.9912    0.9911    0.9911       450
+
+Chu so co recall thap nhat: [8] (0.9767)
+Chu so co precision thap nhat: [8] (0.9767)
+So anh kiem tra moi chu so: [45 46 44 46 45 46 45 45 43 45]
+Chenh lech tuyet doi giua macro avg va weighted avg:
+  precision: 0.000009
+  recall: 0.000103
+  f1-score: 0.000056
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Chữ số [8] có recall thấp nhất (0.9767), nghĩa là có tỷ lệ ảnh thật thuộc chữ số đó bị nhận thành chữ số khác cao nhất.
+Chữ số [8] có precision thấp nhất (0.9767), nghĩa là trong các ảnh bị mô hình gọi tên là chữ số đó, tỷ lệ gọi nhầm lớn nhất.
+Macro avg cho mỗi lớp trọng số 1/10; weighted avg dùng số ảnh thật của mỗi lớp làm trọng số. Tập kiểm tra có từ 43 đến 46 ảnh mỗi chữ số, nên các trọng số gần nhau và hai cách trung bình gần bằng nhau. Sự gần nhau ở đây không phải là tính chất luôn đúng với dữ liệu lệch lớp.
+
+--- Cell 9 ---
+Quy tac: bao bo hoc neu xac suat >= nguong
+So nguong da xet tren tap hoc: 899
+Nguong lon nhat dat yeu cau: 0.171773644908
+Recall ngoai fold: 0.8090
+Precision ngoai fold: 0.5106
+Nguong ke tiep: 0.171884149999; recall: 0.7978
+
+Ket qua tap kiem tra voi nguong da chot:
+Recall = 0.8000; Dat 0.8
+Precision = 0.5106
+So ban bi bao = 47; tim dung = 24; bao nham = 23
+
+NHẬN XÉT VÀ GIẢI THÍCH
+cross_val_predict chia riêng tập học thành 5 phần. Mỗi sinh viên được dự đoán bởi mô hình chưa học trên sinh viên đó. StandardScaler nằm trong pipeline nên cũng chỉ học thống kê từ phần huấn luyện của mỗi fold, tránh rò rỉ dữ liệu.
+Ngưỡng 0.171773644908 là mốc lớn nhất đạt recall ít nhất 0,8 trên các dự đoán ngoài fold. Khi tăng ngưỡng, tập người bị báo chỉ có thể thu hẹp, nên recall không thể tăng. Giữ ngưỡng cao nhất giúp hạn chế số lời báo trong khi vẫn đạt yêu cầu trên tập học; điều đó không bảo đảm precision là lớn nhất.
+Chương trình xét toàn bộ xác suất ngoài fold, vì vậy có thể chọn ngưỡng khác lưới 0,05 ở phần thực hành. Phép so sánh dùng giá trị đầy đủ, không dùng con số đã làm tròn khi in.
+Trên tập kiểm tra, recall = 0.8000, đạt yêu cầu 0,8; precision = 0.5106 với 47 người bị báo.
+Đạt 80% trên dự đoán ngoài fold không bảo đảm đạt 80% trên dữ liệu mới, vì mẫu kiểm tra và mô hình học toàn bộ tập học khác các fold. Sau khi đánh giá tập kiểm tra, không chỉnh lại ngưỡng theo nhãn kiểm tra; làm vậy sẽ dùng đáp án để lựa chọn và đánh giá thiếu khách quan.
+
+--- Cell 11 ---
+Logistic: AUC = 0.9449
+Rung ngau nhien: AUC = 0.9249
+Da luu hinh: figures/roc.png
+[Bieu do hien thi trong notebook]
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Logistic có AUC lớn hơn (0.9449), nghĩa là diện tích dưới đường ROC lớn hơn và khả năng xếp hạng tổng thể tốt hơn trên tập này.
+Có vùng logistic cao hơn và có vùng rừng cao hơn, nên hai đường có giao nhau và đổi vị trí; không có một đường luôn ôm sát góc trên bên trái hơn ở mọi mức báo động nhầm.
+Ví dụ Logistic cao hơn: FPR = 0.0000, TPR logistic = 0.4000, TPR rừng = 0.3000.
+Ví dụ Rừng cao hơn: FPR = 0.0037, TPR logistic = 0.4000, TPR rừng = 0.5333.
+Ở cùng FPR, TPR cao hơn nghĩa là tìm được nhiều người bỏ học hơn với cùng tỷ lệ báo nhầm. AUC lớn hơn không bảo đảm recall lớn hơn tại ngưỡng 0,5; chọn ngưỡng cần dựa trên tập học.
+
+--- Cell 13 ---
+Canh bao FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+Canh bao FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+Tap kiem tra, cung nguong xac suat 0.5:
+        Mo hinh      Che do  Precision  Recall     F1
+Rung ngau nhien Binh thuong     0.7727  0.5667 0.6538
+Rung ngau nhien    Can bang     0.5250  0.7000 0.6000
+        SVM RBF Binh thuong     0.8333  0.5000 0.6250
+        SVM RBF    Can bang     0.8125  0.4333 0.5652
+
+Muc thay doi: can bang tru binh thuong
+                 Precision  Recall      F1  TB tri tuyet doi
+Mo hinh                                                     
+Rung ngau nhien    -0.2477 +0.1333 -0.0538           +0.1450
+SVM RBF            -0.0208 -0.0667 -0.0598           +0.0491
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Hai chế độ dùng cùng tập học, tập kiểm tra, tham số và ngưỡng xác suất 0,5. Chỉ class_weight thay đổi; StandardScaler của SVM chỉ học trên tập học.
+class_weight='balanced' gán trọng số nghịch với số mẫu của lớp, làm lỗi ở lớp hiếm được coi trọng hơn trong lúc học. Nó thay đổi mô hình, không thêm mẫu và không tự đổi ngưỡng đánh giá.
+Rung ngau nhien: precision đổi -0.2477, recall đổi +0.1333, F1 đổi -0.0538.
+SVM RBF: precision đổi -0.0208, recall đổi -0.0667, F1 đổi -0.0598.
+Nếu đo mức thay đổi tổng hợp bằng trung bình trị tuyệt đối của ba chênh lệch, mô hình thay đổi nhiều nhất là Rung ngau nhien (0.1450). Đây là tiêu chí so sánh được nêu rõ, không đồng nghĩa mô hình đó tốt hơn.
+Cân bằng lớp không bảo đảm recall hay F1 đều tăng. SVC có bước ước lượng xác suất riêng, nên nhãn từ predict có thể khác quy tắc predict_proba >= 0,5; bài này giữ quy tắc xác suất như bảng so mô hình trong PDF. Muốn chọn chế độ hoặc ngưỡng để sử dụng, cần kiểm định chéo trên tập học, không lựa chọn dựa vào bảng kiểm tra này.
+
+--- Cell 15 ---
+So can hoc: 48; so can kiem tra: 12
+Can duoc sua: vi tri 0 trong tap kiem tra, chi so dong 0
+Gia that: 3.0000 ty dong
+Du doan truoc: 3.2179; sau: 8.2179 ty dong
+
+Thuoc do       Truoc         Sau    Chenh lech    Doi tuong doi (%)
+MAE           0.2578      0.6745      +0.4167    +161.63
+RMSE          0.3730      1.5505      +1.1775    +315.64
+R2            0.9622      0.3475      -0.6148    -63.89
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Giữ nguyên mô hình, nhãn thật và mọi dự đoán khác; chỉ cộng 5 tỷ vào dự đoán của một căn. Sai số của căn đó đổi từ +0.2179 thành +5.2179 tỷ đồng.
+Nếu chỉ xét chênh lệch số học tuyệt đối trong bảng, RMSE thay đổi nhiều nhất (1.1775). Tuy nhiên, R² không có đơn vị, còn MAE và RMSE có đơn vị tỷ đồng, nên không dùng cách so số thô này để kết luận độ nhạy của cả ba thước đo.
+Trong hai thước đo cùng đơn vị, RMSE thay đổi nhiều hơn. MAE đổi +0.4167 tỷ, RMSE đổi +1.1775 tỷ.
+MAE lấy trung bình |sai số|, còn RMSE lấy căn của trung bình sai số bình phương. Bình phương làm sai số lớn có trọng lượng lớn hơn: sai số 5 tỷ đóng góp 5 vào tổng trị tuyệt đối nhưng 25 vào tổng bình phương. Vì vậy RMSE nhạy hơn với dự đoán hỏng lớn; không có nghĩa giá trị RMSE luôn lớn hơn mức tăng MAE trong mọi thay đổi tùy ý.
+R² = 1 - SSE/SST; nhãn thật không đổi nên SST giữ nguyên. Trong lần thử này, R² đổi từ 0.9622 thành 0.3475. R² có thể âm nếu tổng sai số bình phương lớn hơn khi luôn đoán giá trung bình của tập kiểm tra.
+
