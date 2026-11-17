@@ -1,0 +1,150 @@
+--- Cell 3 ---
+
+--- Cell 5 ---
+Dataset dang su dung: khach_hang.csv
+Silhouette tu tinh: 0.7227055108; thu vien: 0.7227055108
+Khach co silhouette nho nhat (chi so bat dau tu 0): 113
+tuoi             38.0
+thu_nhap         25.4
+diem_chi_tieu    41.0
+Cum: 2; a=0.917758; b=0.944750; s=0.028571
+Da luu hinh: figures/bai1_silhouette.png
+[Bieu do hien thi trong notebook]
+
+NHẬN XÉT VÀ GIẢI THÍCH
+a là khoảng cách Euclid trung bình tới các điểm khác cùng cụm, không tính chính điểm đang xét. b là giá trị nhỏ nhất trong các khoảng cách trung bình tới từng cụm khác; b không phải khoảng cách tới tâm cụm hay tới một điểm gần nhất.
+s=(b-a)/max(a,b). s gần 1 thể hiện điểm gắn chặt với cụm; gần 0 cho thấy hai cụm cạnh tranh; s âm cho thấy điểm gần cụm khác hơn theo khoảng cách trung bình. Cụm chỉ có một điểm được quy ước s=0, tương thích scikit-learn.
+Trung bình tự tính 0.722706 khớp thư viện. Khách 113 nằm tại thu nhập 25.4, chi tiêu 41.0, được đánh dấu sao trên hình dựng lại cùng hai trục của Hình 3. Đây là khách có mức phân tách kém nhất trong kết quả này, không có nghĩa chắc chắn bị phân cụm sai.
+
+--- Cell 7 ---
+Dataset dang su dung: khach_hang.csv
+K=2: silhouette=0.373046
+K=3: silhouette=0.422022
+K=4: silhouette=0.455826
+K=5: silhouette=0.480790
+K=6: silhouette=0.476023
+K=7: silhouette=0.462742
+K=8: silhouette=0.459609
+K=9: silhouette=0.462152
+K=10: silhouette=0.457308
+K tot nhat: 5
+Tam cu (don vi goc):
+    thu_nhap  diem_chi_tieu   tuoi
+0      7.48          80.20  24.94
+3      8.04          18.85  44.88
+2     17.39          49.30  40.45
+1     30.13          19.97  42.86
+4     30.21          81.53  32.62
+Tam moi (don vi goc):
+     tuoi  thu_nhap  diem_chi_tieu  so_khach
+0  44.88      8.04          18.85        40
+1  25.13      8.48          77.56        39
+4  41.65     17.58          49.18        57
+2  42.86     30.13          19.97        35
+3  32.08     30.28          82.00        39
+Bang doi chieu cum cu va moi:
+ col_0   0   1   2   3   4
+row_0                    
+0       0  35   0   0   0
+1       0   0  35   0   0
+2       0   4   0   0  56
+3      40   0   0   0   0
+4       0   0   0  39   1
+
+NHẬN XÉT VÀ GIẢI THÍCH
+K tốt nhất theo silhouette là 5, vẫn là 5.
+Bảng tâm đã đổi về đơn vị gốc để đối chiếu thu nhập, chi tiêu và tuổi. Khi tuổi tham gia khoảng cách, những người gần nhau về thu nhập và chi tiêu vẫn có thể bị tách nếu tuổi khác nhau. Bảng chéo cho thấy cụm nào bị tách hoặc gộp; số thứ tự cụm là tùy ý nên không so trực tiếp cụm 0 cũ với cụm 0 mới.
+Silhouette ở không gian ba đặc trưng dùng khoảng cách khác không gian hai đặc trưng, nên không coi việc tăng chỉ số giữa hai không gian là bằng chứng chắc chắn phân khúc có ích hơn.
+Cụm mới 0 có 40 khách chung với cụm cũ 3. So tâm hai cụm này: thu nhập đổi +0.00, chi tiêu đổi +0.00, tuổi đổi +0.00.
+Cụm mới 1 có 35 khách chung với cụm cũ 0. So tâm hai cụm này: thu nhập đổi +1.00, chi tiêu đổi -2.64, tuổi đổi +0.19.
+Cụm mới 2 có 35 khách chung với cụm cũ 1. So tâm hai cụm này: thu nhập đổi +0.00, chi tiêu đổi +0.00, tuổi đổi +0.00.
+Cụm mới 3 có 39 khách chung với cụm cũ 4. So tâm hai cụm này: thu nhập đổi +0.07, chi tiêu đổi +0.47, tuổi đổi -0.55.
+Cụm mới 4 có 56 khách chung với cụm cũ 2. So tâm hai cụm này: thu nhập đổi +0.19, chi tiêu đổi -0.12, tuổi đổi +1.20.
+Đối chiếu trên chọn cụm cũ có nhiều khách chung nhất cho mỗi cụm mới; không ép ghép một-một khi cụm bị tách hoặc gộp.
+
+--- Cell 9 ---
+Dataset dang su dung: khach_hang.csv
+random: dat 23.0 = 30/50; min=23.016749; max=204.045584; trung binh=53.291388
+Inertia 50 lan: [ 23.   23.   23.   84.2  23.   23.   23.   73.6 116.6  73.7  72.4  84.2
+  73.7  23.   84.  118.2  23.  117.4  23.   23.  119.3  23.   23.   23.
+  23.   23.   23.   23.  204.   23.   84.1  23.   23.   84.1  72.4  23.
+  23.   23.   23.   23.   23.  116.6  23.   73.3  23.  118.2 119.3  23.
+  23.   84.9]
+k-means++: dat 23.0 = 50/50; min=23.016749; max=23.016749; trung binh=23.016749
+Inertia 50 lan: [23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23.
+ 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23.
+ 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23. 23.]
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Trong 50 seed đã thử, k-means++ đạt mốc 23,0 nhiều nhất (50/50 lần). Nếu hai cách bằng nhau, thí nghiệm này chưa cho thấy cách nào đáng tin hơn theo tiêu chí đó.
+23,0 trong tài liệu là số làm tròn một chữ số; vì vậy đếm sau khi làm tròn inertia một chữ số, không kiểm tra bằng đúng số thực 23.0. Inertia là tổng bình phương khoảng cách tới tâm; thấp hơn nghĩa là nghiệm tốt hơn trên cùng dữ liệu và K.
+K-Means có thể dừng ở cực tiểu cục bộ tùy tâm ban đầu. Khởi tạo ngẫu nhiên có thể đặt nhiều tâm vào cùng vùng; k-means++ chọn tâm tiếp theo với xác suất tỷ lệ bình phương khoảng cách tới tâm gần nhất, giúp trải tâm ra nhưng không bảo đảm tối ưu toàn cục.
+n_init=1 cố ý làm lộ ảnh hưởng của một lần khởi tạo. Khi dùng thực tế, n_init lớn chạy nhiều khởi tạo và giữ nghiệm inertia thấp nhất; random_state giúp tái lập, không tự bảo đảm nghiệm tốt.
+
+--- Cell 11 ---
+Da luu hinh: figures/anh_goc.png
+Da luu hinh: figures/anh_16_mau.png
+anh: kich thuoc=(427, 640, 3); goc=550154 byte; 16 mau=134431 byte; ty so=4.092
+Da luu hinh: figures/dohoangphuc3x4_goc.png
+Da luu hinh: figures/dohoangphuc3x4_16_mau.png
+dohoangphuc3x4: kich thuoc=(975, 735, 3); goc=297299 byte; 16 mau=63164 byte; ty so=4.707
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Ảnh mẫu sau nén còn 134431 byte so với 550154 byte của PNG gốc; ảnh cá nhân còn 63164 byte so với 297299 byte.
+Cả hai bản trước và sau đều được lưu PNG để so cùng định dạng. Kết quả dung lượng được đo từ tệp thật; không mặc định ảnh 16 màu nhỏ đúng 6 lần. Con số 6 trong phần thực hành là tỷ lệ lý tưởng 24 bit/4 bit khi biểu diễn chỉ số bảng màu, chưa kể bảng màu và phần đầu tệp.
+plt.imsave lưu PNG RGB/RGBA chứ không tự bảo đảm dùng bảng màu 4 bit. Kích thước tệp còn phụ thuộc bộ nén và cấu trúc ảnh. Bỏ kênh alpha nghĩa là mất thông tin trong suốt; đây là xử lý theo yêu cầu đề. Mô hình học trên tối đa 5.000 pixel rồi dự đoán mọi pixel để giảm thời gian.
+
+--- Cell 13 ---
+Dataset dang su dung: hai_vang_trang.csv
+eps=0.2: so cum=1; nhieu=40; ARI=-0.0014
+eps=0.3: so cum=1; nhieu=10; ARI=0.0012
+eps=0.4: so cum=1; nhieu=3; ARI=-0.0001
+K-Means: ARI=0.2475
+Da luu hinh: figures/bai5_dbscan.png
+[Bieu do hien thi trong notebook]
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Các eps có ARI cao hơn K-Means trên dữ liệu này: []. ARI so với nhãn thật không phụ thuộc việc hoán đổi số thứ tự cụm; nhãn chỉ dùng để đánh giá sau phân cụm. ARI ở đây tính trên toàn bộ mẫu, kể cả nhóm nhãn -1.
+eps nhỏ làm vùng lân cận hẹp, dễ tách thành nhiều cụm hoặc đánh dấu nhiễu; eps lớn có thể nối hai vầng trăng thành một cụm. DBSCAN có thể theo hình cong nhờ mật độ, còn K-Means gán theo tâm gần nhất nên thường cắt ngang hai vầng trăng. Phải xem cả hình, số cụm và số điểm nhiễu khi kết luận.
+
+--- Cell 15 ---
+Cum            0    1    2   3    4    5    6    7    8    9
+Chu so that                                                 
+0            176    0    0   0    0    0    2    0    0    0
+1              0  100    0  54    1    2    0    1    0   24
+2              1    8    3   2   13    0    0    0    2  148
+3              0    7    7   0  154    0    0    2   13    0
+4              0    2   11   3    0    0  165    0    0    0
+5              0    0    0   0    2    1    2  136   41    0
+6              1    3    0   0    0  177    0    0    0    0
+7              0    2  174   2    0    0    0    1    0    0
+8              0  100    5   6    2    2    0    4   52    3
+9              0    1    8  20    6    0    0    6  139    0
+
+Ty le gom vao cum dong nhat cua tung chu so:
+Chu so that
+0    0.9888
+1    0.5495
+2    0.8362
+3    0.8415
+4    0.9116
+5    0.7473
+6    0.9779
+7    0.9721
+8    0.5747
+9    0.7722
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Chữ số được gom gọn nhất theo tỷ lệ vào cụm đông nhất là [0], đạt 98.88%. Đây là mức tập trung, không phải accuracy phân loại.
+Mỗi cột là một cụm, mỗi hàng là chữ số thật. Số thứ tự cụm không phải nhãn chữ số. Các cặp dưới đây mô tả hai chữ số đông nhất trong từng cụm, kèm số lượng để thấy mức trộn; một chữ số cũng có thể bị chia thành nhiều cụm.
+Cụm 0: chữ số 0 có 176 ảnh; chữ số 2 có 1 ảnh, tổng 178 ảnh.
+Cụm 1: chữ số 1 có 100 ảnh; chữ số 8 có 100 ảnh, tổng 223 ảnh.
+Cụm 2: chữ số 7 có 174 ảnh; chữ số 4 có 11 ảnh, tổng 208 ảnh.
+Cụm 3: chữ số 1 có 54 ảnh; chữ số 9 có 20 ảnh, tổng 87 ảnh.
+Cụm 4: chữ số 3 có 154 ảnh; chữ số 2 có 13 ảnh, tổng 178 ảnh.
+Cụm 5: chữ số 6 có 177 ảnh; chữ số 1 có 2 ảnh, tổng 182 ảnh.
+Cụm 6: chữ số 4 có 165 ảnh; chữ số 0 có 2 ảnh, tổng 169 ảnh.
+Cụm 7: chữ số 5 có 136 ảnh; chữ số 9 có 6 ảnh, tổng 150 ảnh.
+Cụm 8: chữ số 9 có 139 ảnh; chữ số 8 có 52 ảnh, tổng 247 ảnh.
+Cụm 9: chữ số 2 có 148 ảnh; chữ số 1 có 24 ảnh, tổng 175 ảnh.
+
