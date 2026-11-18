@@ -1,0 +1,91 @@
+--- Cell 3 ---
+
+--- Cell 5 ---
+Dataset dang su dung: xor.csv
+ chi_so        tu_tinh       thu_vien       sai_lech
+    338 0.017959280395 0.017959280395 0.000000000000
+    342 0.999457305053 0.999457305053 0.000000000000
+     40 0.801705590116 0.801705590116 0.000000000000
+    231 0.135632987822 0.135632987822 0.000000000000
+    242 0.956438894064 0.956438894064 0.000000000000
+Kich thuoc trong so: [(2, 8), (8, 1)]
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Ma trận đầu vào 5×2 nhân trọng số 2×8, cộng 8 hệ số chặn để ra tổng đầu vào của 8 nơ-ron. ReLU lấy max(0,z) theo từng phần tử; lớp ra nhân trọng số 8×1 và cộng một hệ số chặn.
+Sigmoid biến logit của lớp ra thành xác suất lớp 1. coefs_ chứa trọng số, intercepts_ chứa hệ số chặn đã học. Lan truyền tiến chỉ tính dự đoán, không cập nhật các trọng số này.
+Sai lệch lớn nhất là 1.110e-16, khớp thư viện trong sai số số thực. Mạng nhị phân có một đầu ra sigmoid, không phải tám xác suất hay một đầu ra ReLU. Dùng đúng thứ tự cột và đúng năm mẫu của tập kiểm tra như phần thực hành.
+
+--- Cell 7 ---
+ x1  x2  h1  h2  y  XOR
+  0   0   0   0  0    0
+  0   1   0   1  1    1
+  1   0   1   0  1    1
+  1   1   0   0  0    0
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Khi hai bit bằng nhau, cả hai hiệu đều bằng 0 nên h1=h2=0 và y=0. Với (1,0), h1=1 và h2=0; với (0,1), h1=0 và h2=1. Vì vậy y=1 đúng khi hai bit khác nhau, khớp cả bốn trường hợp XOR.
+Hai ReLU giữ riêng phần dương của hai hiệu trái dấu. Tổng của chúng bằng |x1-x2|. Trên đầu vào nhị phân, trị tuyệt đối này chính là XOR; trên số thực bất kỳ, nó chỉ là khoảng cách tuyệt đối và không còn là phép XOR logic.
+Lớp ra ở mạng được cho là phép cộng tuyến tính, không có sigmoid. Tính phi tuyến cần thiết nằm ở hai ReLU; nếu bỏ ReLU thì hai hiệu triệt tiêu và đầu ra luôn bằng 0. Đây là mạng đặt trọng số thủ công, không có bước huấn luyện.
+
+--- Cell 9 ---
+Dataset dang su dung: hai_vang_trang.csv
+kich_hoat  accuracy_hoc  accuracy_kiem_tra
+ logistic      0.840000           0.853333
+     tanh      0.866667           0.906667
+     relu      0.880000           0.906667
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Trong lần chia và các tham số đã cố định, tanh, relu có accuracy kiểm tra cao nhất: 0.9067.
+Logistic và tanh có vùng bão hòa; ReLU bằng 0 ở phía âm và tuyến tính ở phía dương. Chúng tạo biểu diễn khác nhau nên kết quả có thể khác dù cùng kiến trúc. Khoảng cách accuracy học và kiểm tra giúp nhận diện học vẹt, nhưng một lần chia không chứng minh hàm nào tốt nhất cho mọi dữ liệu. Nếu cần lựa chọn để triển khai, chọn bằng kiểm định chéo trên tập học.
+
+--- Cell 11 ---
+Dang hoc voi learning_rate_init=0.0001
+Dang hoc voi learning_rate_init=0.001
+Dang hoc voi learning_rate_init=0.01
+Dang hoc voi learning_rate_init=0.1
+ toc_do_hoc  so_vong  loss_cuoi  accuracy_kiem_tra
+     0.0001      582   0.018928           0.988889
+     0.0010      144   0.005210           0.984444
+     0.0100       38   0.001077           0.977778
+     0.1000       30   0.112580           0.962222
+Da luu hinh: figures/toc_do_hoc.png
+[Bieu do hien thi trong notebook]
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Tốc độ học nhỏ cập nhật trọng số ít mỗi bước, có thể cần nhiều vòng; tốc độ lớn có thể vượt qua vùng nghiệm tốt, dao động hoặc dừng với nghiệm kém. Đọc bốn đường loss cùng số vòng và accuracy thực tế trong bảng, không mặc định đường nào cũng giảm đều.
+Trong lần thử, loss cuối nằm từ 0.001077 đến 0.112580; accuracy kiểm tra từ 0.9622 đến 0.9889.
+Loss là mục tiêu tối ưu trên tập học, không phải accuracy trên tập kiểm tra. Dừng trước max_iter phản ánh tiêu chí dung sai, không chứng minh tìm được tối ưu toàn cục. Nếu có cảnh báo hội tụ, cần ghi nhận rằng nghiệm còn bị giới hạn bởi số vòng, không che cảnh báo đó.
+
+--- Cell 13 ---
+Fitting 5 folds for each of 12 candidates, totalling 60 fits
+{'mlpclassifier__alpha': 0.0001, 'mlpclassifier__hidden_layer_sizes': (10,)} accuracy_CV=0.948016
+{'mlpclassifier__alpha': 0.0001, 'mlpclassifier__hidden_layer_sizes': (50,)} accuracy_CV=0.974013
+{'mlpclassifier__alpha': 0.0001, 'mlpclassifier__hidden_layer_sizes': (100,)} accuracy_CV=0.975498
+{'mlpclassifier__alpha': 0.0001, 'mlpclassifier__hidden_layer_sizes': (50, 50)} accuracy_CV=0.968063
+{'mlpclassifier__alpha': 0.01, 'mlpclassifier__hidden_layer_sizes': (10,)} accuracy_CV=0.948757
+{'mlpclassifier__alpha': 0.01, 'mlpclassifier__hidden_layer_sizes': (50,)} accuracy_CV=0.975498
+{'mlpclassifier__alpha': 0.01, 'mlpclassifier__hidden_layer_sizes': (100,)} accuracy_CV=0.975498
+{'mlpclassifier__alpha': 0.01, 'mlpclassifier__hidden_layer_sizes': (50, 50)} accuracy_CV=0.968063
+{'mlpclassifier__alpha': 1, 'mlpclassifier__hidden_layer_sizes': (10,)} accuracy_CV=0.965108
+{'mlpclassifier__alpha': 1, 'mlpclassifier__hidden_layer_sizes': (50,)} accuracy_CV=0.978469
+{'mlpclassifier__alpha': 1, 'mlpclassifier__hidden_layer_sizes': (100,)} accuracy_CV=0.977723
+{'mlpclassifier__alpha': 1, 'mlpclassifier__hidden_layer_sizes': (50, 50)} accuracy_CV=0.977725
+Tham so tot nhat: {'mlpclassifier__alpha': 1, 'mlpclassifier__hidden_layer_sizes': (50,)}
+Accuracy CV=0.978469; kiem tra MLP=0.982222; SVM=0.991111
+
+NHẬN XÉT VÀ GIẢI THÍCH
+Tổ hợp tốt nhất theo CV trên tập học là {'mlpclassifier__alpha': 1, 'mlpclassifier__hidden_layer_sizes': (50,)}. MLP chưa vượt SVM trên cùng tập kiểm tra: 0.9822 so với 0.9911.
+Scaler nằm trong pipeline nên mỗi fold chỉ học trung bình và độ lệch chuẩn từ phần huấn luyện của fold đó. Sau khi chọn bằng điểm CV, GridSearchCV học lại tổ hợp tốt nhất trên toàn bộ tập học rồi mới đánh giá tập kiểm tra. Không dùng điểm kiểm tra để đổi tổ hợp hay phá hòa.
+Độ rộng và độ sâu quyết định số tham số; alpha điều chỉnh phạt L2. Mạng lớn hơn không tự bảo đảm tổng quát tốt hơn. Đây là kết quả trên một cách chia cố định, không chứng minh MLP hay SVM luôn tốt hơn.
+
+--- Cell 15 ---
+Dataset dang su dung: gia_nha.csv
+MLP: MAE=0.5008 ty dong; gia 250 m2=28.1758 ty dong
+Hoi quy tuyen tinh: MAE=0.2578 ty dong; gia 250 m2=19.9139 ty dong
+Khoang dien tich hoc: 37.6 - 117.5 m2
+
+NHẬN XÉT VÀ GIẢI THÍCH
+MAE kiểm tra của MLP là 0.5008 tỷ, của hồi quy tuyến tính là 0.2578 tỷ. Cả hai dùng diện tích làm đặc trưng và cùng cách chia dữ liệu như bài 1; scaler của MLP chỉ fit trên tập học.
+Ở 250 m², MLP dự đoán 28.1758 tỷ và đường thẳng dự đoán 19.9139 tỷ. Nếu 250 m² vượt phạm vi học đã in, đây là ngoại suy.
+Mạng ReLU là hàm tuyến tính từng đoạn và có thể ngoại suy, nhưng độ dốc ngoài vùng học không được dữ liệu kiểm chứng. Hồi quy tuyến tính tiếp tục một xu hướng thẳng đã giả định, thường dễ diễn giải hơn. Không có giá thật của căn 250 m² nên không thể kết luận chắc mô hình nào dự đoán đúng hơn ở đó chỉ từ hai giá dự đoán; MAE trong tập kiểm tra cũng không chứng minh chất lượng ngoại suy.
+
